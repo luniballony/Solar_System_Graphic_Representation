@@ -1,4 +1,5 @@
 // constants.js
+// dont forget to add the list name to the index.html file
 
 // Speeds
 /* export const Positions = {
@@ -14,41 +15,29 @@
 }; */
 
 // Sizes 
-/* export const Sizes = {
-    Sun : 8,
-    Mercury: (Sun * 1),
-    Venus: (Sun * 1),
-    Earth: (Sun * 1),
-    Mars: (Sun * 1),
-    Jupiter: (Sun * 1),
-    Saturn: (Sun * 1),
-    Uranus: (Sun * 1),
-    Neptune: (Sun * 1),
-}; */
-
 export const Sizes = {
-    Sun : 8,
-    Mercury: 2,
+    Sun : 10,
+    Mercury: 1,
     Venus: 2,
     Earth: 2,
     Mars: 2,
-    Jupiter: 2,
-    Saturn: 2,
-    Uranus: 2,
-    Neptune: 2,
+    Jupiter: 6,
+    Saturn: 5,
+    Uranus: 3,
+    Neptune: 3,
 };
  
-// Colors
+// Colors add8e6 
 export const Colors = {
     Sun : 0xE3AD27,
     Mercury : 0xCC0000,
-    Venus : 0xCC0000,
+    Venus : 0xEDE8D0,
     Earth : 0x4FB06D,
-    Mars : 0xCC0000,
-    Jupiter : 0xCC0000,
-    Saturn : 0xCC0000,
-    Uranos : 0xCC0000,
-    Neptune : 0xCC0000, 
+    Mars : 0xEDE8D0,
+    Jupiter : 0xEDE8D0,
+    Saturn : 0xEDE8D0,
+    Uranus : 0xADD8E6,
+    Neptune : 0xADD8E6, 
     Stars : 0xffffff,
 };
 

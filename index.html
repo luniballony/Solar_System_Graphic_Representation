@@ -19,10 +19,11 @@
             // easier to manage the code and test sizes
             const SpeedRotation = 0.025;
             const Shine = 18;
+            const distance = 14; //sets distance between planets in case we want it to be the same between all
 
 
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.z = 50; // positions the camera (how far/close it is to the objects)
             camera.position.y = 10;
 
@@ -44,6 +45,33 @@
             scene.add(Sun);
             
 
+
+            // Mercury
+            const MercuryGeometry = new THREE.SphereGeometry(Sizes.Mercury, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const MercuryMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Mercury,
+                specular: 0x33333,   // Specular color, adjust for shininess
+                shininess: Shine     // Higher shininess = smaller, sharper reflections
+            });
+            const Mercury = new THREE.Mesh(MercuryGeometry, MercuryMaterial);
+            Mercury.scale.set(1, 1, 1); // Resizes the sphere
+            Mercury.position.set(distance, 0, 0); // Moves the sphere on the screen (horizontally)
+            scene.add(Mercury);
+
+
+            // Venus
+            const VenusGeometry = new THREE.SphereGeometry(Sizes.Venus, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const VenusMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Venus,
+                specular: 0x33333,   // Specular color, adjust for shininess
+                shininess: Shine     // Higher shininess = smaller, sharper reflections
+            });
+            const Venus = new THREE.Mesh(VenusGeometry, VenusMaterial);
+            Venus.scale.set(1, 1, 1); // Resizes the sphere
+            Venus.position.set(distance * 2, 0, 0); // Moves the sphere on the screen (horizontally)
+            scene.add(Venus);
+
+
             // Earth
             const EarthGeometry = new THREE.SphereGeometry(Sizes.Earth, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
             const EarthMaterial = new THREE.MeshPhongMaterial ({
@@ -53,9 +81,60 @@
             });
             const Earth = new THREE.Mesh(EarthGeometry, EarthMaterial);
             Earth.scale.set(1, 1, 1); // Resizes the sphere
-            Earth.position.set(18, 0, 0); // Moves the sphere on the screen (horizontally)
+            Earth.position.set(distance * 3, 0, 0); // Moves the sphere on the screen (horizontally)
             scene.add(Earth);
+
             
+            // Mars
+            const MarsGeometry = new THREE.SphereGeometry(Sizes.Mars, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const MarsMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Mars,
+                specular: 0x33333,   // Specular color, adjust for shininess
+                shininess: Shine     // Higher shininess = smaller, sharper reflections
+            });
+            const Mars = new THREE.Mesh(MarsGeometry, MarsMaterial);
+            Mars.scale.set(1, 1, 1); // Resizes the sphere
+            Mars.position.set(distance * 4, 0, 0); // Moves the sphere on the screen (horizontally)
+            scene.add(Mars);
+
+
+            // Jupiter
+            const JupiterGeometry = new THREE.SphereGeometry(Sizes.Jupiter, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const JupiterMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Jupiter,
+                specular: 0x33333,   // Specular color, adjust for shininess
+                shininess: Shine     // Higher shininess = smaller, sharper reflections
+            });
+            const Jupiter = new THREE.Mesh(JupiterGeometry, JupiterMaterial);
+            Jupiter.scale.set(1, 1, 1); // Resizes the sphere
+            Jupiter.position.set(distance * 5, 0, 0); // Moves the sphere on the screen (horizontally)
+            scene.add(Jupiter);
+
+
+            // Uranos
+            const UranusGeometry = new THREE.SphereGeometry(Sizes.Uranus, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const UranusMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Uranus,
+                specular: 0x33333,   // Specular color, adjust for shininess
+                shininess: Shine     // Higher shininess = smaller, sharper reflections
+            });
+            const Uranus = new THREE.Mesh(UranusGeometry, UranusMaterial);
+            Uranus.scale.set(1, 1, 1); // Resizes the sphere
+            Uranus.position.set(distance * 6, 0, 0); // Moves the sphere on the screen (horizontally)
+            scene.add(Uranus);
+
+
+            // Neptune
+            const NeptuneGeometry = new THREE.SphereGeometry(Sizes.Neptune, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const NeptuneMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Neptune,
+                specular: 0x33333,   // Specular color, adjust for shininess
+                shininess: Shine     // Higher shininess = smaller, sharper reflections
+            });
+            const Neptune = new THREE.Mesh(NeptuneGeometry, NeptuneMaterial);
+            Neptune.scale.set(1, 1, 1); // Resizes the sphere
+            Neptune.position.set(distance * 7, 0, 0); // Moves the sphere on the screen (horizontally)
+            scene.add(Neptune);
 
 
             // LIGHT
