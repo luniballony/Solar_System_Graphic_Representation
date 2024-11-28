@@ -12,33 +12,12 @@
             // efolio b - matilde carmo 2201036 v1
             // v1 : Sizes and Colors set
             import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
+
+            // imports file with constants defined
+            import {Sizes, Colors } from './constants.js';
             
             // easier to manage the code and test sizes
             const SpeedRotation = 0.025;
-
-            // Sun + Planets + Stars Size
-            const SunSize = 9;
-            const MercurySize = 1;
-            const VenusSize = 1;
-            const EarthSize = 1;
-            const MarsSize = 1;
-            const JupiterSize = 1;
-            const SaturnSize = 1;
-            const NeptuneSize = 1; 
-            const StarsSize = 1; 
-
-            // Sun + Planets + Stars Colors
-            const SunColor = 0xE3AD27;
-            const MercuryColor = 0xCC0000;
-            const VenusColor = 0xCC0000;
-            const EarthColor = 0xCC0000;
-            const MarsColor = 0xCC0000;
-            const JupiterColor = 0xCC0000;
-            const SaturnColor = 0xCC0000;
-            const UranosColor = 0xCC0000;
-            const NeptuneColor = 0xCC0000; 
-            const StarsColor = 0xffffff;
-
             const Shine = 18;
 
 
@@ -53,16 +32,30 @@
 
 
             // Sun
-            const geometry = new THREE.SphereGeometry(SunSize, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
-            const material = new THREE.MeshPhongMaterial ({
-                color: SunColor,
+            const SunGeometry = new THREE.SphereGeometry(Sizes.Sun, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const SunMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Sun,
                 specular: 0x33333,   // Specular color, adjust for shininess
                 shininess: Shine     // Higher shininess = smaller, sharper reflections
             });
-            const sphere = new THREE.Mesh(geometry, material);
-            sphere.scale.set(1, 1, 1); // Resizes the sphere
-            sphere.position.set(0, SunSize, 0); // Moves the sphere on the screen (vertically)
-            scene.add(sphere);
+            const Sun = new THREE.Mesh(SunGeometry, SunMaterial);
+            Sun.scale.set(1, 1, 1); // Resizes the sphere
+            Sun.position.set(0, 0, 0); // Moves the sphere on the screen (vertically)
+            scene.add(Sun);
+            
+
+            // Earth
+            const EarthGeometry = new THREE.SphereGeometry(Sizes.Earth, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
+            const EarthMaterial = new THREE.MeshPhongMaterial ({
+                color: Colors.Earth,
+                specular: 0x33333,   // Specular color, adjust for shininess
+                shininess: Shine     // Higher shininess = smaller, sharper reflections
+            });
+            const Earth = new THREE.Mesh(EarthGeometry, EarthMaterial);
+            Earth.scale.set(1, 1, 1); // Resizes the sphere
+            Earth.position.set(18, 0, 0); // Moves the sphere on the screen (horizontally)
+            scene.add(Earth);
+            
 
 
             // LIGHT
