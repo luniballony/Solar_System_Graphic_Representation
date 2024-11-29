@@ -25,6 +25,8 @@ export const Sizes = {
     Saturn: 5,
     Uranus: 3,
     Neptune: 3,
+    Stars: 1,
+    Moon: 0.7,
 };
  
 // Colors add8e6 
@@ -39,7 +41,21 @@ export const Colors = {
     Uranus : 0xADD8E6,
     Neptune : 0xADD8E6, 
     Stars : 0xffffff,
+    Moon: 0xffffff,
 };
+
+
+// Speed
+/* export const Speed = {
+    Mercury : 0.01,
+    Venus : 0.01,
+    Earth : 0.01,
+    Mars : 0.01,
+    Jupiter : 0.01,
+    Saturn : 0.01,
+    Uranus : 0.01,
+    Neptune : 0.01, 
+}; */
 
 // speed of self rotation
 
