@@ -1,18 +1,6 @@
 // constants.js
 // dont forget to add the list name to the index.html file
 
-// Speeds
-/* export const Positions = {
-    Sun : 1,
-    Mercury: (Sun + 1),
-    Venus: (Mercury + 1),
-    Earth: (Venus + 1),
-    Mars: (Earth + 1),
-    Jupiter: (Mars + 1),
-    Saturn: (Jupiter + 1),
-    Uranus: (Saturn + 1),
-    Neptune: (Uranus + 1),
-}; */
 
 // Sizes 
 export const Sizes = {
@@ -46,16 +34,14 @@ export const Colors = {
 
 
 // Speed
-/* export const Speed = {
-    Mercury : 0.01,
-    Venus : 0.01,
-    Earth : 0.01,
-    Mars : 0.01,
-    Jupiter : 0.01,
-    Saturn : 0.01,
-    Uranus : 0.01,
-    Neptune : 0.01, 
-}; */
+export let MercurySpeed = 0;
+export let VenusSpeed = 0;
+export let EarthSpeed = 0;
+export let MarsSpeed = 0;
+export let JupiterSpeed = 0;
+export let SaturnSpeed = 0;
+export let UranusSpeed = 0;
+export let NeptuneSpeed = 0;
 
 // speed of self rotation
 
