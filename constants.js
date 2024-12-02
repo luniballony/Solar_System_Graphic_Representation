@@ -12,12 +12,25 @@ export const Sizes = {
     Jupiter: 6,
     Saturn: 5,
     Uranus: 3,
-    Neptune: 3,
+    Neptune: 16,
     Stars: 1,
     Moon: 0.7,
 };
+
+// Distances - the distances shall be calculated as distance * specific_planet so that the slider is easier to code
+export const Distances = {
+    Mercury : 1,
+    Venus : 5,
+    Earth : 3,
+    Mars : 10,
+    Jupiter : 5,
+    Saturn : 6,
+    Uranus : 7,
+    Neptune : 20,
+    Moon: 3,
+};
  
-// Colors add8e6 
+// Colors  
 export const Colors = {
     Sun : 0xE3AD27,
     Mercury : 0xCC0000,
@@ -31,6 +44,7 @@ export const Colors = {
     Stars : 0xffffff,
     Moon: 0xffffff,
 };
+
 
 
 // Speed
