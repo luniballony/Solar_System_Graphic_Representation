@@ -4,17 +4,23 @@
 
 
 Features to add: 
-- create planets
+- create planets (DONE)
 - create stars
-- add rotation of the planets
-- add rotation of the planets around the sun
-- add trajectory of the planets
-- add a system to calculate distances
+- add rotation of the planets 
+- add rotation of the planets around the sun (DONE)
+- add trajectory of the planets (DONE)
+- add a system to calculate distances (DONE)
 - add ambiance light
 - add light from the sun
 - add texture + imagine for each planet and sun
 - create slider to control speed
 - create slider to control number of stars (optional)
+- create moon (DONE)
+
+Optimizations: 
+- create function for distances (DONE)
+- create function for planets
+- create function for rings
 
 
 Project started on november 28 of 2024

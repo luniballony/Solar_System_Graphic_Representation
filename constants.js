@@ -1,7 +1,6 @@
 // constants.js
 // dont forget to add the list name to the index.html file
 
-
 // Sizes 
 export const Sizes = {
     Sun : 12,
@@ -43,6 +42,7 @@ export const Colors = {
     Neptune : 0xADD8E6, 
     Stars : 0xffffff,
     Moon: 0xffffff,
+    Rings: 0xffffff,
 };
 
 
@@ -75,12 +75,15 @@ export let SaturnDistance = JupiterDistance + Sizes.Jupiter + Sizes.Saturn + dis
 export let UranusDistance = SaturnDistance + Sizes.Saturn + Sizes.Uranus + distance_between;
 export let NeptuneDistance = UranusDistance + Sizes.Uranus + Sizes.Neptune + distance_between;
 
-// allows for modifications done to variables like distance_between to have an effect
+// allows for modifications done to variables like distance_between and therefore to have an effect
 export function distance_calculater (Previous_dist, previous_plan_radius, current_plan_radius, distance_between_plan) {
     let random = previous_plan_radius + current_plan_radius + distance_between_plan + Previous_dist;
     return random;
 }; 
 
+
+// others
+export let r_smoothness = 70; // ring smoothness. the higher the more smooth the ring will be
 
 
 
