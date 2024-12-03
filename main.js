@@ -6,17 +6,33 @@
     import {Sizes, Colors, Distances} from './constants.js';
 
     // easier to manage the code and test sizes
-    const SpeedRotation = 0.025;
     const Shine = 18;
-    const distance = 14; //sets distance between planets in case we want it to be the same between all
+    const distance = 12; //sets distance between planets in case we want it to be the same between all
+    const distance_2 = 4;
 
-    const radius = 10; // Distance from the rotation center
-    let angle = 0; // Initial angle
+/*
+    const M = distance + Sizes.Mercury;
+    const V = M + Sizes.Mercury + Sizes.Venus + distance_2;
+    const E = V + Sizes.Venus + Sizes.Earth + distance_2;
+    const Ma = E + Sizes.Earth + Sizes.Mars + distance_2;
+    const J = Ma + Sizes.Mars + Sizes.Jupiter + distance_2;
+    const S = J + Sizes.Jupiter + Sizes.Saturn + distance_2;
+    const U = S + Sizes.Saturn + Sizes.Uranus + distance_2;
+    const N = U + Sizes.Uranus + Sizes.Neptune + distance_2;
+  */
 
+    const M = distance;
+    const V = M + distance_2;
+    const E = V + distance_2;
+    const Ma = E + distance_2;
+    const J = Ma + distance_2;
+    const S = J + distance_2;
+    const U = S + distance_2;
+    const N = U + distance_2;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 100; // positions the camera (how far/close it is to the objects)
+    camera.position.z = 50; // positions the camera (how far/close it is to the objects)
     camera.position.y = 15;
 
     const renderer = new THREE.WebGLRenderer();          
@@ -47,7 +63,7 @@
     });
     const Mercury = new THREE.Mesh(MercuryGeometry, MercuryMaterial);
     Mercury.scale.set(1, 1, 1); // Resizes the sphere
-    Mercury.position.set(distance * Distances.Mercury, 0, 0); // Moves the sphere on the screen (horizontally)
+    Mercury.position.set(M, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Mercury);
     
 
@@ -60,7 +76,7 @@
     });
     const Venus = new THREE.Mesh(VenusGeometry, VenusMaterial);
     Venus.scale.set(1, 1, 1); // Resizes the sphere
-    Venus.position.set(distance * Distances.Venus, 0, 0); // Moves the sphere on the screen (horizontally)
+    Venus.position.set(V, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Venus);
 
 
@@ -73,7 +89,7 @@
     });
     const Earth = new THREE.Mesh(EarthGeometry, EarthMaterial);
     Earth.scale.set(1, 1, 1); // Resizes the sphere
-    Earth.position.set((distance * Distances.Earth), 0, 0); // Moves the sphere on the screen (horizontally)
+    Earth.position.set(E, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Earth);
 
     // Moon
@@ -97,7 +113,7 @@
     });
     const Mars = new THREE.Mesh(MarsGeometry, MarsMaterial);
     Mars.scale.set(1, 1, 1); // Resizes the sphere
-    Mars.position.set(distance * Distances.Mars, 0, 0); // Moves the sphere on the screen (horizontally)
+    Mars.position.set(Ma, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Mars);
 
 
@@ -110,7 +126,7 @@
     });
     const Jupiter = new THREE.Mesh(JupiterGeometry, JupiterMaterial);
     Jupiter.scale.set(1, 1, 1); // Resizes the sphere
-    Jupiter.position.set(distance * Distances.Jupiter, 0, 0); // Moves the sphere on the screen (horizontally)
+    Jupiter.position.set(J, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Jupiter);
 
     // Saturn
@@ -121,8 +137,8 @@
         shininess: Shine     // Higher shininess = smaller, sharper reflections
     });
     const Saturn = new THREE.Mesh(SaturnGeometry, SaturnMaterial);
-    Jupiter.scale.set(1, 1, 1); // Resizes the sphere
-    Jupiter.position.set(distance * Distances.Saturn, 0, 0); // Moves the sphere on the screen (horizontally)
+    Saturn.scale.set(1, 1, 1); // Resizes the sphere
+    Saturn.position.set(S, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Saturn);
 
     // Uranos
@@ -134,7 +150,7 @@
     });
     const Uranus = new THREE.Mesh(UranusGeometry, UranusMaterial);
     Uranus.scale.set(1, 1, 1); // Resizes the sphere
-    Uranus.position.set(distance * Distances.Uranus, 0, 0); // Moves the sphere on the screen (horizontally)
+    Uranus.position.set(U, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Uranus);
 
 
@@ -147,7 +163,7 @@
     });
     const Neptune = new THREE.Mesh(NeptuneGeometry, NeptuneMaterial);
     Neptune.scale.set(1, 1, 1); // Resizes the sphere
-    Neptune.position.set(distance * 50, 0, 0); // Moves the sphere on the screen (horizontally)
+    Neptune.position.set(N, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Neptune);
 
 
@@ -156,8 +172,8 @@
 
 
     // Mercury Ring    
-    const MercuryRingOuterRadius = distance + Sizes.Mercury ;  
-    const MercuryRingInnerRadius = distance - 0.4 + Sizes.Mercury;  
+    const MercuryRingOuterRadius = M;  
+    const MercuryRingInnerRadius = M - 0.4;  
     const MercuryRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const MercuryRingGeometry = new THREE.RingGeometry(MercuryRingInnerRadius, MercuryRingOuterRadius, MercuryRingThetaSegments);
@@ -166,15 +182,15 @@
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const MercuryRing = new THREE.Mesh(MercuryRingGeometry, MercuryRingMaterial);
-    MercuryRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    MercuryRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     MercuryRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     MercuryRing.rotation.y = 0; 
     MercuryRing.rotation.z = 0; 
     scene.add(MercuryRing);   
 
     //Venus Ring 
-    const VenusRingOuterRadius = distance + Sizes.Venus + Distances.Venus;  
-    const VenusRingInnerRadius = distance - 0.4 + Sizes.Venus + Distances.Venus;  
+    const VenusRingOuterRadius = V;  
+    const VenusRingInnerRadius = V - 0.4;  
     const VenusRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const VenusRingGeometry = new THREE.RingGeometry(VenusRingInnerRadius, VenusRingOuterRadius, VenusRingThetaSegments);
@@ -183,15 +199,15 @@
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const VenusRing = new THREE.Mesh(VenusRingGeometry, VenusRingMaterial);
-    VenusRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    VenusRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     VenusRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     VenusRing.rotation.y = 0; 
     VenusRing.rotation.z = 0; 
     scene.add(VenusRing); 
 
     // Earth Ring
-    const EarthRingOuterRadius = distance + Sizes.Earth + Distances.Earth;  
-    const EarthRingInnerRadius = distance - 0.4 + Sizes.Earth + Distances.Earth;  
+    const EarthRingOuterRadius = E;  
+    const EarthRingInnerRadius = E - 0.4;  
     const EarthRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const EarthRingGeometry = new THREE.RingGeometry(EarthRingInnerRadius, EarthRingOuterRadius, EarthRingThetaSegments);
@@ -200,15 +216,15 @@
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const EarthRing = new THREE.Mesh(EarthRingGeometry, EarthRingMaterial);
-    EarthRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    EarthRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     EarthRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     EarthRing.rotation.y = 0; 
     EarthRing.rotation.z = 0; 
     scene.add(EarthRing); 
     
     // Mars Ring
-    const MarsRingOuterRadius = distance + Sizes.Mars + Distances.Mars;  
-    const MarsRingInnerRadius = distance - 0.4 + Sizes.Mars + Distances.Mars;  
+    const MarsRingOuterRadius = Ma;  
+    const MarsRingInnerRadius = Ma - 0.4;  
     const MarsRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const MarsRingGeometry = new THREE.RingGeometry(MarsRingInnerRadius, MarsRingOuterRadius, MarsRingThetaSegments);
@@ -217,15 +233,15 @@
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const MarsRing = new THREE.Mesh(MarsRingGeometry, MarsRingMaterial);
-    MarsRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    MarsRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     MarsRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     MarsRing.rotation.y = 0; 
     MarsRing.rotation.z = 0; 
     scene.add(MarsRing); 
     
     // Jupiter Ring
-    const JupiterRingOuterRadius = distance + Sizes.Jupiter + Distances.Jupiter;  
-    const JupiterRingInnerRadius = distance - 0.4 + Sizes.Jupiter + Distances.Jupiter;  
+    const JupiterRingOuterRadius = J;  
+    const JupiterRingInnerRadius = J - 0.4;  
     const JupiterRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const JupiterRingGeometry = new THREE.RingGeometry(JupiterRingInnerRadius, JupiterRingOuterRadius, JupiterRingThetaSegments);
@@ -234,7 +250,7 @@
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const JupiterRing = new THREE.Mesh(JupiterRingGeometry, JupiterRingMaterial);
-    JupiterRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    JupiterRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     JupiterRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     JupiterRing.rotation.y = 0; 
     JupiterRing.rotation.z = 0; 
@@ -242,8 +258,8 @@
 
 
     // Saturn Ring
-    const SaturnRingOuterRadius = distance + Sizes.Saturn + Distances.Saturn;  
-    const SaturnRingInnerRadius = distance - 0.4 + Sizes.Saturn + Distances.Saturn;  
+    const SaturnRingOuterRadius = S;  
+    const SaturnRingInnerRadius = S - 0.4;  
     const SaturnRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const SaturnRingGeometry = new THREE.RingGeometry(SaturnRingInnerRadius, SaturnRingOuterRadius, SaturnRingThetaSegments);
@@ -252,15 +268,15 @@
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const SaturnRing = new THREE.Mesh(SaturnRingGeometry, SaturnRingMaterial);
-    SaturnRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    SaturnRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     SaturnRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     SaturnRing.rotation.y = 0; 
     SaturnRing.rotation.z = 0; 
     scene.add(SaturnRing);
 
     // Uranus Ring
-    const UranusRingOuterRadius = distance + Sizes.Uranus + Distances.Uranus;  
-    const UranusRingInnerRadius = distance - 0.4 + Sizes.Uranus + Distances.Uranus;  
+    const UranusRingOuterRadius = U;  
+    const UranusRingInnerRadius = U - 0.4;  
     const UranusRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const UranusRingGeometry = new THREE.RingGeometry(UranusRingInnerRadius, UranusRingOuterRadius, UranusRingThetaSegments);
@@ -269,24 +285,24 @@
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const UranusRing = new THREE.Mesh(UranusRingGeometry, UranusRingMaterial);
-    UranusRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    UranusRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     UranusRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     UranusRing.rotation.y = 0; 
     UranusRing.rotation.z = 0; 
     scene.add(UranusRing);
 
     // Neptune Ring 
-    const NeptuneRingOuterRadius = distance + Sizes.Neptune + Distances.Neptune;  
-    const NeptuneRingInnerRadius = distance - 0.4 + Sizes.UrNeptuneanus + Distances.Neptune;  
+    const NeptuneRingOuterRadius = N;  
+    const NeptuneRingInnerRadius = N - 0.4;  
     const NeptuneRingThetaSegments = 50;  // number of segments makes ring smoother    
     // Create the ring geometry
     const NeptuneRingGeometry = new THREE.RingGeometry(NeptuneRingInnerRadius, NeptuneRingOuterRadius, NeptuneRingThetaSegments);
     const NeptuneRingMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffffff, // Set your desired color
+        color: 0xfffff, // Set your desired color
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const NeptuneRing = new THREE.Mesh(NeptuneRingGeometry, NeptuneRingMaterial);
-    NeptuneRing.position.set( 1, 0, 0); // Moves the sphere on the screen (horizontally)
+    NeptuneRing.position.set( 0, 0, 0); // Moves the sphere on the screen (horizontally)
     NeptuneRing.rotation.x = Math.PI / 2; // Makes the ring horizontal
     NeptuneRing.rotation.y = 0; 
     NeptuneRing.rotation.z = 0; 
@@ -331,34 +347,33 @@
         NeptuneSpeed += 0.01;
 
         // Calculate new position to allow rotation
-        Mercury.position.x = distance * Math.cos(MercurySpeed);
-        Mercury.position.z = distance * Math.sin(MercurySpeed);
+        Mercury.position.x = M * Math.cos(MercurySpeed);
+        Mercury.position.z = M * Math.sin(MercurySpeed);
 
-        Venus.position.x = (distance + Sizes.Venus ) * Math.cos(MercurySpeed);
-        Venus.position.z = (distance + Sizes.Venus )  * Math.sin(MercurySpeed);
+        Venus.position.x = V * Math.cos(MercurySpeed);
+        Venus.position.z = V  * Math.sin(MercurySpeed);
 
-        Earth.position.x = (distance + Sizes.Earth )  * Math.cos(EarthSpeed);
-        Earth.position.z = (distance + Sizes.Earth )  * Math.sin(MercurySpeed);
+        Earth.position.x = E  * Math.cos(EarthSpeed);
+        Earth.position.z = E  * Math.sin(MercurySpeed);
 
-        Mars.position.x = (distance + 16 )  * Math.cos(MarsSpeed);
-        Mars.position.z = (distance + 16 )  * Math.sin(MarsSpeed);
+        Mars.position.x = Ma  * Math.cos(MarsSpeed);
+        Mars.position.z = Ma  * Math.sin(MarsSpeed);
 
-        Jupiter.position.x = (distance + 27 )  * Math.cos(JupiterSpeed);
-        Jupiter.position.z = (distance + 27 )  * Math.sin(JupiterSpeed);
+        Jupiter.position.x = J  * Math.cos(JupiterSpeed);
+        Jupiter.position.z = J  * Math.sin(JupiterSpeed);
 
-        Saturn.position.x = (distance + 13 )  * Math.cos(SaturnSpeed);
-        Saturn.position.z = (distance + 13 )  * Math.sin(SaturnSpeed);
+        Saturn.position.x = S  * Math.cos(SaturnSpeed);
+        Saturn.position.z = S  * Math.sin(SaturnSpeed);
 
-        Uranus.position.x = (distance * 2.5 )  * Math.cos(UranusSpeed);
-        Uranus.position.z = (distance * 2.5 )  * Math.sin(UranusSpeed);
+        Uranus.position.x = U  * Math.cos(UranusSpeed);
+        Uranus.position.z = U  * Math.sin(UranusSpeed);
 
-        Neptune.position.x = (distance * 3 )  * Math.cos(NeptuneSpeed);
-        Neptune.position.z = (distance * 3 )  * Math.sin(NeptuneSpeed);
+        Neptune.position.x = N  * Math.cos(NeptuneSpeed);
+        Neptune.position.z = N  * Math.sin(NeptuneSpeed);
 
         renderer.render(scene, camera);
 
     };
-
 
 
     animate();  
