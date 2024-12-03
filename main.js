@@ -7,10 +7,10 @@
 
     // easier to manage the code and test sizes
     const Shine = 18;
-    const distance = 12; //sets distance between planets in case we want it to be the same between all
+    const distance = 12.2; //sets distance between planets in case we want it to be the same between all
     const distance_2 = 4;
 
-/*
+
     const M = distance + Sizes.Mercury;
     const V = M + Sizes.Mercury + Sizes.Venus + distance_2;
     const E = V + Sizes.Venus + Sizes.Earth + distance_2;
@@ -19,20 +19,12 @@
     const S = J + Sizes.Jupiter + Sizes.Saturn + distance_2;
     const U = S + Sizes.Saturn + Sizes.Uranus + distance_2;
     const N = U + Sizes.Uranus + Sizes.Neptune + distance_2;
-  */
 
-    const M = distance;
-    const V = M + distance_2;
-    const E = V + distance_2;
-    const Ma = E + distance_2;
-    const J = Ma + distance_2;
-    const S = J + distance_2;
-    const U = S + distance_2;
-    const N = U + distance_2;
+
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 50; // positions the camera (how far/close it is to the objects)
+    camera.position.z = 100; // positions the camera (how far/close it is to the objects)
     camera.position.y = 15;
 
     const renderer = new THREE.WebGLRenderer();          
