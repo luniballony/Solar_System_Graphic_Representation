@@ -4,24 +4,18 @@
 
     // imports file with constants defined
     import {Sizes, Colors, Distances} from './constants.js';
+    // backup
+    //import {MercuryDistance, VenusDistance, EarthDistance, MarsDistance, 
+      //  JupiterDistance, SaturnDistance, UranusDistance, NeptuneDistance} from './constants.js';
 
-    // easier to manage the code and test sizes
+    import {distance, distance_between, distance_calculater} from './constants.js';
+
+    
     const Shine = 18;
-    const distance = 12.2; //sets distance between planets in case we want it to be the same between all
+    //const distance = 12.2; //sets distance between planets in case we want it to be the same between all
     const distance_2 = 4;
 
-
-    const M = distance + Sizes.Mercury;
-    const V = M + Sizes.Mercury + Sizes.Venus + distance_2;
-    const E = V + Sizes.Venus + Sizes.Earth + distance_2;
-    const Ma = E + Sizes.Earth + Sizes.Mars + distance_2;
-    const J = Ma + Sizes.Mars + Sizes.Jupiter + distance_2;
-    const S = J + Sizes.Jupiter + Sizes.Saturn + distance_2;
-    const U = S + Sizes.Saturn + Sizes.Uranus + distance_2;
-    const N = U + Sizes.Uranus + Sizes.Neptune + distance_2;
-
-
-
+   
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 100; // positions the camera (how far/close it is to the objects)
@@ -55,7 +49,6 @@
     });
     const Mercury = new THREE.Mesh(MercuryGeometry, MercuryMaterial);
     Mercury.scale.set(1, 1, 1); // Resizes the sphere
-    Mercury.position.set(M, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Mercury);
     
 
@@ -68,7 +61,6 @@
     });
     const Venus = new THREE.Mesh(VenusGeometry, VenusMaterial);
     Venus.scale.set(1, 1, 1); // Resizes the sphere
-    Venus.position.set(V, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Venus);
 
 
@@ -81,7 +73,6 @@
     });
     const Earth = new THREE.Mesh(EarthGeometry, EarthMaterial);
     Earth.scale.set(1, 1, 1); // Resizes the sphere
-    Earth.position.set(E, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Earth);
 
     // Moon
@@ -93,7 +84,7 @@
     });
     const Moon = new THREE.Mesh(MoonGeometry, MoonMaterial);
     Moon.scale.set(1, 1, 1); // Resizes the sphere
-    Moon.position.set(Distances.Moon, 0, 0); // Moves the sphere on the screen (horizontally)
+    Moon.position.set(Distances.Moon, 0, 0); // places moon 
     Earth.add(Moon);
 
     // Mars
@@ -105,7 +96,6 @@
     });
     const Mars = new THREE.Mesh(MarsGeometry, MarsMaterial);
     Mars.scale.set(1, 1, 1); // Resizes the sphere
-    Mars.position.set(Ma, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Mars);
 
 
@@ -118,7 +108,6 @@
     });
     const Jupiter = new THREE.Mesh(JupiterGeometry, JupiterMaterial);
     Jupiter.scale.set(1, 1, 1); // Resizes the sphere
-    Jupiter.position.set(J, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Jupiter);
 
     // Saturn
@@ -130,7 +119,6 @@
     });
     const Saturn = new THREE.Mesh(SaturnGeometry, SaturnMaterial);
     Saturn.scale.set(1, 1, 1); // Resizes the sphere
-    Saturn.position.set(S, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Saturn);
 
     // Uranos
@@ -142,7 +130,6 @@
     });
     const Uranus = new THREE.Mesh(UranusGeometry, UranusMaterial);
     Uranus.scale.set(1, 1, 1); // Resizes the sphere
-    Uranus.position.set(U, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Uranus);
 
 
@@ -155,7 +142,6 @@
     });
     const Neptune = new THREE.Mesh(NeptuneGeometry, NeptuneMaterial);
     Neptune.scale.set(1, 1, 1); // Resizes the sphere
-    Neptune.position.set(N, 0, 0); // Moves the sphere on the screen (horizontally)
     scene.add(Neptune);
 
 
@@ -305,7 +291,8 @@
     pointLight.position.set(0, 10, 30);  // Position of the light
     scene.add(pointLight);
 
-
+    
+    
     //set speeds as 0
     let MercurySpeed = 0;
     let VenusSpeed = 0;
@@ -316,12 +303,24 @@
     let UranusSpeed = 0;
     let NeptuneSpeed = 0;
 
+
+    // distances through functions
+    let MercuryDistance = distance + Sizes.Mercury; // must be called like this as its the first planet
+    let VenusDistance = distance_calculater (MercuryDistance, Sizes.Mercury, Sizes.Venus, distance_between);
+    let EarthDistance = distance_calculater (VenusDistance, Sizes.Venus, Sizes.Earth, distance_between);
+    let MarsDistance = distance_calculater (EarthDistance, Sizes.Earth, Sizes.Mars, distance_between);
+    let JupiterDistance = distance_calculater (MarsDistance, Sizes.Mars, Sizes.Jupiter, distance_between);
+    let SaturnDistance = distance_calculater (JupiterDistance, Sizes.Jupiter, Sizes.Saturn, distance_between); 
+    let UranusDistance = distance_calculater (SaturnDistance, Sizes.Saturn, Sizes.Uranus, distance_between);
+    let NeptuneDistance = distance_calculater (UranusDistance, Sizes.Uranus, Sizes.Neptune, distance_between);
+
     function animate() {
         requestAnimationFrame(animate);
 
+        // the value determines the speed of rotation
         Mercury.rotation.y += 0.01; 
         Venus.rotation.y += 0.01; 
-        Earth.rotation.y += 0.01; // the value determines the speed
+        Earth.rotation.y += 0.01; 
         Mars.rotation.y += 0.01; 
         Jupiter.rotation.y += 0.01; 
         Saturn.rotation.y += 0.01; 
@@ -339,29 +338,29 @@
         NeptuneSpeed += 0.01;
 
         // Calculate new position to allow rotation
-        Mercury.position.x = M * Math.cos(MercurySpeed);
-        Mercury.position.z = M * Math.sin(MercurySpeed);
+        Mercury.position.x = MercuryDistance * Math.cos(MercurySpeed);
+        Mercury.position.z = MercuryDistance * Math.sin(MercurySpeed);
 
-        Venus.position.x = V * Math.cos(MercurySpeed);
-        Venus.position.z = V  * Math.sin(MercurySpeed);
+        Venus.position.x = VenusDistance * Math.cos(MercurySpeed);
+        Venus.position.z = VenusDistance  * Math.sin(MercurySpeed);
 
-        Earth.position.x = E  * Math.cos(EarthSpeed);
-        Earth.position.z = E  * Math.sin(MercurySpeed);
+        Earth.position.x = EarthDistance  * Math.cos(EarthSpeed);
+        Earth.position.z = EarthDistance  * Math.sin(MercurySpeed);
 
-        Mars.position.x = Ma  * Math.cos(MarsSpeed);
-        Mars.position.z = Ma  * Math.sin(MarsSpeed);
+        Mars.position.x = MarsDistance  * Math.cos(MarsSpeed);
+        Mars.position.z = MarsDistance  * Math.sin(MarsSpeed);
 
-        Jupiter.position.x = J  * Math.cos(JupiterSpeed);
-        Jupiter.position.z = J  * Math.sin(JupiterSpeed);
+        Jupiter.position.x = JupiterDistance  * Math.cos(JupiterSpeed);
+        Jupiter.position.z = JupiterDistance  * Math.sin(JupiterSpeed);
 
-        Saturn.position.x = S  * Math.cos(SaturnSpeed);
-        Saturn.position.z = S  * Math.sin(SaturnSpeed);
+        Saturn.position.x = SaturnDistance  * Math.cos(SaturnSpeed);
+        Saturn.position.z = SaturnDistance  * Math.sin(SaturnSpeed);
 
-        Uranus.position.x = U  * Math.cos(UranusSpeed);
-        Uranus.position.z = U  * Math.sin(UranusSpeed);
+        Uranus.position.x = UranusDistance  * Math.cos(UranusSpeed);
+        Uranus.position.z = UranusDistance  * Math.sin(UranusSpeed);
 
-        Neptune.position.x = N  * Math.cos(NeptuneSpeed);
-        Neptune.position.z = N  * Math.sin(NeptuneSpeed);
+        Neptune.position.x = NeptuneDistance  * Math.cos(NeptuneSpeed);
+        Neptune.position.z = NeptuneDistance  * Math.sin(NeptuneSpeed);
 
         renderer.render(scene, camera);
 
