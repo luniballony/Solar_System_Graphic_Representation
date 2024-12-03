@@ -19,7 +19,7 @@
    
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 100; // positions the camera (how far/close it is to the objects)
+    camera.position.z = 90; // positions the camera (how far/close it is to the objects)
     camera.position.y = 15;
 
     const renderer = new THREE.WebGLRenderer();          
@@ -63,6 +63,8 @@
         ring_mesh.rotation.y = 0; 
         ring_mesh.rotation.z = 0; 
         scene.add(ring_mesh);  
+
+        return ring_mesh;
     }
 
    
@@ -115,6 +117,24 @@
     let NeptuneRing = ring_creator ('NeptuneRing', NeptuneDistance, Colors.Rings);
 
 
+    // Saturn Outer Ring 
+    const SaturnOuterRingOuterRadius = 4;  
+    const SaturnOuterRingInnerRadius = 3.2;  
+    const SaturnOuterRingThetaSegments = r_smoothness;  // number of segments makes ring smoother    
+    // Create the ring geometry
+    const SaturnOuterRingGeometry = new THREE.RingGeometry(SaturnOuterRingOuterRadius, SaturnOuterRingInnerRadius, SaturnOuterRingThetaSegments);
+    const SaturnOuterRingMaterial = new THREE.MeshBasicMaterial({
+        color: Colors.SaturnOuterRing, // Set to desired, r_color: makes it so that you can change color of each ring
+        side: THREE.DoubleSide, // Render both sides of the ring
+    });
+    const SaturnOuterRing = new THREE.Mesh(SaturnOuterRingGeometry, SaturnOuterRingMaterial);
+    SaturnOuterRing.position.set(0, 0, 0); // position of ring
+    SaturnOuterRing.rotation.x = Math.PI / 2 - 0.8; // Makes the ring horizontal
+    SaturnOuterRing.rotation.y = 0; 
+    SaturnOuterRing.rotation.z = 0; 
+    Saturn.add(SaturnOuterRing); 
+
+
     // LIGHT
     const pointLight = new THREE.PointLight(0xffffff, 1.3); // Color, intensity
     pointLight.position.set(0, 10, 30);  // Position of the light
@@ -122,7 +142,8 @@
 
     
     
-    //set speeds as 0
+    // Set speeds as 0
+    // must be set in this file due to later modifications to variables
     let MercurySpeed = 0;
     let VenusSpeed = 0;
     let EarthSpeed = 0;
@@ -131,9 +152,7 @@
     let SaturnSpeed = 0;
     let UranusSpeed = 0;
     let NeptuneSpeed = 0;
-
-
-    
+   
 
     function animate() {
         requestAnimationFrame(animate);

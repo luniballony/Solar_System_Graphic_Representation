@@ -27,6 +27,7 @@ export const Distances = {
     Uranus : 2,
     Neptune : 2,
     Moon: 3,
+    SaturnOuterRing: 3,
 };
  
 // Colors  
@@ -43,11 +44,13 @@ export const Colors = {
     Stars : 0xffffff,
     Moon: 0xffffff,
     Rings: 0xffffff,
+    SaturnOuterRing: 0xADD8E6,
 };
 
 
 
-// Speed
+// Initial planet speed
+// set speeds as 0
 export let MercurySpeed = 0;
 export let VenusSpeed = 0;
 export let EarthSpeed = 0;
@@ -80,6 +83,7 @@ export function distance_calculater (Previous_dist, previous_plan_radius, curren
     let random = previous_plan_radius + current_plan_radius + distance_between_plan + Previous_dist;
     return random;
 }; 
+
 
 
 // others

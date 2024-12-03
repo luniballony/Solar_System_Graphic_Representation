@@ -16,11 +16,13 @@ Features to add:
 - create slider to control speed
 - create slider to control number of stars (optional)
 - create moon (DONE)
+- option for realistic version
 
 Optimizations: 
 - create function for distances (DONE)
-- create function for planets
-- create function for rings
+- create function for planets (DONE)
+- create function for rings (DONE)
+- create function for stars 
 
 
 Project started on november 28 of 2024
