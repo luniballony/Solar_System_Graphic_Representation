@@ -66,23 +66,6 @@ export let distance = 12.2; //sets distance between planets in case we want it t
 export let distance_between = 4;
 
 
-// currently they all have same distance between each other
-// to change that, replace distance_2 for new variable with new value
-// format: Previous_dist + previous_plan_radius + current_plan_radius + distance_between_plan
-export let MercuryDistance = distance + Sizes.Mercury;
-export let VenusDistance = MercuryDistance + Sizes.Mercury + Sizes.Venus + distance_between;
-export let EarthDistance = VenusDistance + Sizes.Venus + Sizes.Earth + distance_between;
-export let MarsDistance = EarthDistance + Sizes.Earth + Sizes.Mars + distance_between;
-export let JupiterDistance = MarsDistance + Sizes.Mars + Sizes.Jupiter + distance_between;
-export let SaturnDistance = JupiterDistance + Sizes.Jupiter + Sizes.Saturn + distance_between;
-export let UranusDistance = SaturnDistance + Sizes.Saturn + Sizes.Uranus + distance_between;
-export let NeptuneDistance = UranusDistance + Sizes.Uranus + Sizes.Neptune + distance_between;
-
-// allows for modifications done to variables like distance_between and therefore to have an effect
-export function distance_calculater (Previous_dist, previous_plan_radius, current_plan_radius, distance_between_plan) {
-    let random = previous_plan_radius + current_plan_radius + distance_between_plan + Previous_dist;
-    return random;
-}; 
 
 
 

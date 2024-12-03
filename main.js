@@ -8,15 +8,15 @@
     //import {MercuryDistance, VenusDistance, EarthDistance, MarsDistance, 
       //  JupiterDistance, SaturnDistance, UranusDistance, NeptuneDistance} from './constants.js';
 
-    import {distance, distance_between, distance_calculater, r_smoothness} from './constants.js';
+    import {distance, distance_between, r_smoothness} from './constants.js';
+
 
     
+    
     const Shine = 18;
-    //const distance = 12.2; //sets distance between planets in case we want it to be the same between all
-    const distance_2 = 4;
+    const distance_2 = 4;   
 
 
-   
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 90; // positions the camera (how far/close it is to the objects)
@@ -27,11 +27,35 @@
     document.body.appendChild(renderer.domElement);
 
 
+    // Function to set up images for objects
+    function image_setup (image_path) {
+        const image = new THREE.TextureLoader().load(image_path);
+        image.wrapS = THREE.RepeatWrapping;  // Horizontal axis (x-axis)
+        image.wrapT = THREE.RepeatWrapping;  // Vertical axis (y-axis)
+    
+        // Set the number of repeats (adjust this based on the size of the sphere and desired effect)
+        image.repeat.set(3, 3);
+        return image;
+    }
+
+    // Sun + Planets + Moon image set up
+    let SunImage = image_setup ("/sun.jpg");
+    let MercuryImage = image_setup ("/mercury.jpg");
+    let VenusImage = image_setup ("/venus.jpg");
+    let EarthImage = image_setup ("/earth.jpg");
+    let MarsImage = image_setup ("/mars.jpg");
+    let JupiterImage = image_setup ("/jupiter.jpg");
+    let SaturnImage = image_setup ("/saturn.jpg");
+    let UranusImage = image_setup ("/uranus.jpg");
+    let NeptuneImage = image_setup ("/neptune.jpg");
+    let MoonImage = image_setup ("/moon.jpg");
+    let SaturnRingImage = image_setup ("/saturn.jpg");
+
     // Function for planet creation
-    function planet_creator (p_name, p_size, p_color) {
+    function planet_creator (p_name, p_size, image_name) {
         const planet_geometry = new THREE.SphereGeometry(p_size, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
         const planet_material = new THREE.MeshPhongMaterial ({
-            color: p_color,
+            map: image_name,
             specular: 0x33333,   // Specular color, adjust for shininess
             shininess: Shine     // Higher shininess = smaller, sharper reflections
         });
@@ -67,31 +91,39 @@
         return ring_mesh;
     }
 
+    // currently they all have same distance between each other
+    // to change that, replace distance_2 for new variable with new value
+    // format: Previous_dist + previous_plan_radius + current_plan_radius + distance_between_plan
+    // allows for modifications done to variables like distance_between and therefore to have an effect
+    function distance_calculater (Previous_dist, previous_plan_radius, current_plan_radius, distance_between_plan) {
+        let random = previous_plan_radius + current_plan_radius + distance_between_plan + Previous_dist;
+        return random;
+    }; 
+
    
 
-
     // Planet + Sun Creation
-    let Sun = planet_creator ('Sun', Sizes.Sun, Colors.Sun); 
-    let Mercury = planet_creator ('Mercury', Sizes.Mercury, Colors.Mercury);
-    let Venus = planet_creator ('Venus', Sizes.Venus, Colors.Venus);
-    let Earth = planet_creator ('Earth', Sizes.Earth, Colors.Earth);
-    let Mars = planet_creator ('Mars', Sizes.Mars, Colors.Mars);
-    let Jupiter = planet_creator ('Jupiter', Sizes.Jupiter, Colors.Jupiter);
-    let Saturn = planet_creator ('Saturn', Sizes.Saturn, Colors.Saturn);
-    let Uranus = planet_creator ('Uranus', Sizes.Uranus, Colors.Uranus);
-    let Neptune = planet_creator ('Neptune', Sizes.Neptune, Colors.Neptune);
+    let Sun = planet_creator ('Sun', Sizes.Sun, SunImage); 
+    let Mercury = planet_creator ('Mercury', Sizes.Mercury, MercuryImage);
+    let Venus = planet_creator ('Venus', Sizes.Venus, VenusImage);
+    let Earth = planet_creator ('Earth', Sizes.Earth, EarthImage);
+    let Mars = planet_creator ('Mars', Sizes.Mars, MarsImage);
+    let Jupiter = planet_creator ('Jupiter', Sizes.Jupiter, JupiterImage);
+    let Saturn = planet_creator ('Saturn', Sizes.Saturn, SaturnImage);
+    let Uranus = planet_creator ('Uranus', Sizes.Uranus, UranusImage);
+    let Neptune = planet_creator ('Neptune', Sizes.Neptune, NeptuneImage);
 
 
     // Moon
     const MoonGeometry = new THREE.SphereGeometry(Sizes.Moon, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
     const MoonMaterial = new THREE.MeshPhongMaterial ({
-        color: Colors.Moon,
+        map: MoonImage, 
         specular: 0x33333,   // Specular color, adjust for shininess
         shininess: Shine     // Higher shininess = smaller, sharper reflections
     });
     const Moon = new THREE.Mesh(MoonGeometry, MoonMaterial);
     Moon.scale.set(1, 1, 1); // Resizes the sphere
-    Moon.position.set(Distances.Moon, 0, 0); // places moon 
+    Moon.position.set(Distances.Moon, 0, 0); // places moon at certain distance from Earth
     Earth.add(Moon);
 
 
@@ -124,11 +156,11 @@
     // Create the ring geometry
     const SaturnOuterRingGeometry = new THREE.RingGeometry(SaturnOuterRingOuterRadius, SaturnOuterRingInnerRadius, SaturnOuterRingThetaSegments);
     const SaturnOuterRingMaterial = new THREE.MeshBasicMaterial({
-        color: Colors.SaturnOuterRing, // Set to desired, r_color: makes it so that you can change color of each ring
+        map: SaturnRingImage, 
         side: THREE.DoubleSide, // Render both sides of the ring
     });
     const SaturnOuterRing = new THREE.Mesh(SaturnOuterRingGeometry, SaturnOuterRingMaterial);
-    SaturnOuterRing.position.set(0, 0, 0); // position of ring
+    SaturnOuterRing.position.set(0, 0, 0); // position of ring, must be centered with saturn
     SaturnOuterRing.rotation.x = Math.PI / 2 - 0.8; // Makes the ring horizontal
     SaturnOuterRing.rotation.y = 0; 
     SaturnOuterRing.rotation.z = 0; 
