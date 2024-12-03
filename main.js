@@ -4,14 +4,8 @@
 
     // imports file with constants defined
     import {Sizes, Colors, Distances} from './constants.js';
-    // backup
-    //import {MercuryDistance, VenusDistance, EarthDistance, MarsDistance, 
-      //  JupiterDistance, SaturnDistance, UranusDistance, NeptuneDistance} from './constants.js';
-
     import {distance, distance_between, r_smoothness} from './constants.js';
 
-
-    
     
     const Shine = 18;
     const distance_2 = 4;   
@@ -168,9 +162,9 @@
 
 
     // LIGHT
-    const pointLight = new THREE.PointLight(0xffffff, 1.3); // Color, intensity
-    pointLight.position.set(0, 10, 30);  // Position of the light
-    scene.add(pointLight);
+    const SunLight = new THREE.PointLight (0xffa500, 1, 3000);
+    SunLight.position.set(0, 0, 0);
+    scene.add (SunLight);
 
     
     

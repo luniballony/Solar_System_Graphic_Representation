@@ -12,7 +12,7 @@ Features to add:
 - add a system to calculate distances (DONE)
 - add ambiance light
 - add light from the sun
-- add texture + imagine for each planet and sun
+- add texture + imagine for each planet and sun (DONE)
 - create slider to control speed
 - create slider to control number of stars (optional)
 - create moon (DONE)
