@@ -31,22 +31,9 @@
     controls.maxDistance = 150; // Maximum zoom distance
 
 
-    // Sun + Planets + Moon image set up
-    let SunImage = image_setup ("/sun.jpg");
-    let MercuryImage = image_setup ("/mercury.jpg");
-    let VenusImage = image_setup ("/venus.jpg");
-    let EarthImage = image_setup ("/earth.jpg");
-    let MarsImage = image_setup ("/mars.jpg");
-    let JupiterImage = image_setup ("/jupiter.jpg");
-    let SaturnImage = image_setup ("/saturn.jpg");
-    let UranusImage = image_setup ("/uranus.jpg");
-    let NeptuneImage = image_setup ("/neptune.jpg");
-    let MoonImage = image_setup ("/moon.jpg");
-    let SaturnRingImage = image_setup ("/saturn.jpg");
+    
 
-
-
-        
+    // STARS
     //Stars creation
     let tiny_star = star_creator (0.2, Colors.Stars, 160, 350);
     let small_star = star_creator (0.3, Colors.Stars, 160, 350);
@@ -55,6 +42,7 @@
    
 
     let starGroup; // Reference to the current group of stars
+    
 
     function updateStars() {
         const starAmount = parseInt(starSlider.value); // Get the slider value
@@ -71,12 +59,24 @@
     
     // Attach the slider's event listener
     starSlider.addEventListener('input', updateStars);
-    
     // Create initial stars when the scene loads
     updateStars();
     
 
 
+    // PLANETS + SUN + MOON
+    // Sun + Planets + Moon image set up
+    let SunImage = image_setup ("/sun.jpg");
+    let MercuryImage = image_setup ("/mercury.jpg");
+    let VenusImage = image_setup ("/venus.jpg");
+    let EarthImage = image_setup ("/earth.jpg");
+    let MarsImage = image_setup ("/mars.jpg");
+    let JupiterImage = image_setup ("/jupiter.jpg");
+    let SaturnImage = image_setup ("/saturn.jpg");
+    let UranusImage = image_setup ("/uranus.jpg");
+    let NeptuneImage = image_setup ("/neptune.jpg");
+    let MoonImage = image_setup ("/moon.jpg");
+    let SaturnRingImage = image_setup ("/saturnring.png");
 
     // Planet + Sun Creation
     let Sun = planet_creator ('Sun', Sizes.Sun, SunImage); 
@@ -88,7 +88,6 @@
     let Saturn = planet_creator ('Saturn', Sizes.Saturn, SaturnImage);
     let Uranus = planet_creator ('Uranus', Sizes.Uranus, UranusImage);
     let Neptune = planet_creator ('Neptune', Sizes.Neptune, NeptuneImage);
-
 
     // Moon
     const MoonGeometry = new THREE.SphereGeometry(Sizes.Moon, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
@@ -103,7 +102,7 @@
     Earth.add(Moon);
 
 
-
+    // DISTANCES
     // currently they all have same distance between each other
     // to change that, replace distance_between for new variable with new value
     // distances through functions
@@ -117,12 +116,12 @@
     let NeptuneDistance = distance_calculater (UranusDistance, Sizes.Uranus, Sizes.Neptune, distance_between);
 
     
+
+    // RINGS
     let ringsOn = true;
 
     // Get checkboxes
     const toggleNoRingsCheckbox = document.getElementById('NoRings');
-
-    // Event listeners
     toggleNoRingsCheckbox.addEventListener('change', (event) => {
         ringsOn = !event.target.checked; // rings appear when unchecked
     });
@@ -137,15 +136,12 @@
         let SaturnRing = ring_creator ('SaturnRing', SaturnDistance, Colors.Rings);
         let UranusRing = ring_creator ('UranusRing', UranusDistance, Colors.Rings);
         let NeptuneRing = ring_creator ('NeptuneRing', NeptuneDistance, Colors.Rings);
-    }
-
-    
+    }    
 
     // Saturn Outer Ring 
     const SaturnOuterRingOuterRadius = 4;  
     const SaturnOuterRingInnerRadius = 3.2;  
     const SaturnOuterRingThetaSegments = r_smoothness;  // number of segments makes ring smoother    
-    // Create the ring geometry
     const SaturnOuterRingGeometry = new THREE.RingGeometry(SaturnOuterRingOuterRadius, SaturnOuterRingInnerRadius, SaturnOuterRingThetaSegments);
     const SaturnOuterRingMaterial = new THREE.MeshBasicMaterial({
         map: SaturnRingImage, 
@@ -163,7 +159,6 @@
     const SunLight = new THREE.PointLight (Colors.Sun, 1, 3000);
     SunLight.position.set(0, 0, 0);
     scene.add (SunLight);
-
     const ambientlight = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
     scene.add( ambientlight );
     
@@ -179,24 +174,22 @@
     let UranusSpeed = 0;
     let NeptuneSpeed = 0;
    
-    let planetsMove = true;
-    let planetsRotate = true;
 
+
+    // Botton to stop planets
+    let planetsMove = true;
     // Get checkboxes
     const toggleMovementCheckbox = document.getElementById('NoMovement');
-    const toggleRotationCheckbox = document.getElementById('NoRotation');
-
-    // Event listeners
     toggleMovementCheckbox.addEventListener('change', (event) => {
         planetsMove = !event.target.checked; // Planets move when unchecked
     });
 
+    // Botton to stop rotations
+    let planetsRotate = true;
+    const toggleRotationCheckbox = document.getElementById('NoRotation');
     toggleRotationCheckbox.addEventListener('change', (event) => {
         planetsRotate = !event.target.checked; // Planets rotate when unchecked
     });
-
-
-   
 
 
 
