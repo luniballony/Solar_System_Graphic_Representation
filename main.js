@@ -4,7 +4,7 @@
 
     // imports file with constants defined
     import {Sizes, Colors, Distances} from './constants.js';
-    import {distance, distance_between, r_smoothness, Shine} from './constants.js';
+    import {distance, distance_between, r_smoothness, ring_angle, saturn_ring_angle} from './constants.js';
     import {image_setup, planet_creator, ring_creator, distance_calculater, star_creator} from './functions.js';
 
     import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
@@ -34,14 +34,10 @@
     
 
     // STARS
-    //Stars creation
-    let tiny_star = star_creator (0.2, Colors.Stars, 160, 350);
-    let small_star = star_creator (0.3, Colors.Stars, 160, 350);
-    let medium_star = star_creator (0.4, Colors.Stars, 160, 350);
-    let big_star = star_creator (0.5, Colors.Stars, 160, 350);
-   
-
-    let starGroup; // Reference to the current group of stars
+    // Reference to the current group of stars
+    let tiny_star; 
+    let medium_star;
+    let big_star;
     
 
     function updateStars() {
@@ -49,12 +45,16 @@
         starCountDisplay.textContent = starAmount; // Update display with the current count
     
         // Remove the old group of stars, if any
-        if (starGroup) {
-            scene.remove(starGroup);
+        if (tiny_star || medium_star || big_star) {
+            scene.remove(tiny_star);
+            scene.remove(medium_star);
+            scene.remove(big_star);
         }
     
         // Create a new group of stars
-        starGroup = star_creator(0.3, Colors.Stars, starAmount, 250); // Adjust size, color, and range as needed
+        tiny_star = star_creator(0.2, Colors.Stars, starAmount, 250); // Adjust size, color, and range as needed
+        medium_star = star_creator (0.3, Colors.Stars, starAmount, 250);
+        big_star = star_creator (0.4, Colors.Stars, starAmount, 250);
     }
     
     // Attach the slider's event listener
@@ -77,29 +77,19 @@
     let NeptuneImage = image_setup ("/neptune.jpg");
     let MoonImage = image_setup ("/moon.jpg");
     let SaturnRingImage = image_setup ("/saturnring.png");
+    let RingImage = image_setup ("/ring.png");
 
-    // Planet + Sun Creation
-    let Sun = planet_creator ('Sun', Sizes.Sun, SunImage); 
-    let Mercury = planet_creator ('Mercury', Sizes.Mercury, MercuryImage);
-    let Venus = planet_creator ('Venus', Sizes.Venus, VenusImage);
-    let Earth = planet_creator ('Earth', Sizes.Earth, EarthImage);
-    let Mars = planet_creator ('Mars', Sizes.Mars, MarsImage);
-    let Jupiter = planet_creator ('Jupiter', Sizes.Jupiter, JupiterImage);
-    let Saturn = planet_creator ('Saturn', Sizes.Saturn, SaturnImage);
-    let Uranus = planet_creator ('Uranus', Sizes.Uranus, UranusImage);
-    let Neptune = planet_creator ('Neptune', Sizes.Neptune, NeptuneImage);
-
-    // Moon
-    const MoonGeometry = new THREE.SphereGeometry(Sizes.Moon, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
-    const MoonMaterial = new THREE.MeshPhongMaterial ({
-        map: MoonImage, 
-        specular: 0x33333,   // Specular color, adjust for shininess
-        shininess: Shine     // Higher shininess = smaller, sharper reflections
-    });
-    const Moon = new THREE.Mesh(MoonGeometry, MoonMaterial);
-    Moon.scale.set(1, 1, 1); // Resizes the sphere
-    Moon.position.set(Distances.Moon, 0, 0); // places moon at certain distance from Earth
-    Earth.add(Moon);
+    // Planet + Sun + Moon Creation
+    let Sun = planet_creator ('Sun', Sizes.Sun, SunImage, 0, scene); 
+    let Mercury = planet_creator ('Mercury', Sizes.Mercury, MercuryImage, 0, scene);
+    let Venus = planet_creator ('Venus', Sizes.Venus, VenusImage, 0, scene);
+    let Earth = planet_creator ('Earth', Sizes.Earth, EarthImage, 0, scene);
+    let Mars = planet_creator ('Mars', Sizes.Mars, MarsImage, 0, scene);
+    let Jupiter = planet_creator ('Jupiter', Sizes.Jupiter, JupiterImage, 0, scene);
+    let Saturn = planet_creator ('Saturn', Sizes.Saturn, SaturnImage, 0, scene);
+    let Uranus = planet_creator ('Uranus', Sizes.Uranus, UranusImage, 0, scene);
+    let Neptune = planet_creator ('Neptune', Sizes.Neptune, NeptuneImage, 0, scene);
+    let Moon = planet_creator ('Moon', Sizes.Moon, MoonImage, Distances.Moon, Earth);
 
 
     // DISTANCES
@@ -128,31 +118,17 @@
 
     // Rings Creation
     if (ringsOn) {
-        let MercuryRing = ring_creator ('MercuryRing', MercuryDistance, Colors.Rings);
-        let VenusRing = ring_creator ('VenusRing', VenusDistance, Colors.Rings);
-        let EarthRing = ring_creator ('EarthRing', EarthDistance, Colors.Rings);
-        let MarsRing = ring_creator ('MarsRing', MarsDistance, Colors.Rings);
-        let JupiterRing = ring_creator ('JupiterRing', JupiterDistance, Colors.Rings);
-        let SaturnRing = ring_creator ('SaturnRing', SaturnDistance, Colors.Rings);
-        let UranusRing = ring_creator ('UranusRing', UranusDistance, Colors.Rings);
-        let NeptuneRing = ring_creator ('NeptuneRing', NeptuneDistance, Colors.Rings);
-    }    
-
-    // Saturn Outer Ring 
-    const SaturnOuterRingOuterRadius = 4;  
-    const SaturnOuterRingInnerRadius = 3.2;  
-    const SaturnOuterRingThetaSegments = r_smoothness;  // number of segments makes ring smoother    
-    const SaturnOuterRingGeometry = new THREE.RingGeometry(SaturnOuterRingOuterRadius, SaturnOuterRingInnerRadius, SaturnOuterRingThetaSegments);
-    const SaturnOuterRingMaterial = new THREE.MeshBasicMaterial({
-        map: SaturnRingImage, 
-        side: THREE.DoubleSide, // Render both sides of the ring
-    });
-    const SaturnOuterRing = new THREE.Mesh(SaturnOuterRingGeometry, SaturnOuterRingMaterial);
-    SaturnOuterRing.position.set(0, 0, 0); // position of ring, must be centered with saturn
-    SaturnOuterRing.rotation.x = Math.PI / 2 - 0.8; // Makes the ring horizontal
-    SaturnOuterRing.rotation.y = 0; 
-    SaturnOuterRing.rotation.z = 0; 
-    Saturn.add(SaturnOuterRing); 
+        let MercuryRing = ring_creator ('MercuryRing', MercuryDistance, 0.15, RingImage, ring_angle, scene);
+        let VenusRing = ring_creator ('VenusRing', VenusDistance, 0.15, RingImage, ring_angle, scene);
+        let EarthRing = ring_creator ('EarthRing', EarthDistance, 0.15, RingImage, ring_angle, scene);
+        let MarsRing = ring_creator ('MarsRing', MarsDistance, 0.15, RingImage, ring_angle, scene);
+        let JupiterRing = ring_creator ('JupiterRing', JupiterDistance, 0.15, RingImage, ring_angle, scene);
+        let SaturnRing = ring_creator ('SaturnRing', SaturnDistance, 0.15, RingImage, ring_angle, scene);
+        let UranusRing = ring_creator ('UranusRing', UranusDistance, 0.15, RingImage, ring_angle, scene);
+        let NeptuneRing = ring_creator ('NeptuneRing', NeptuneDistance, 0.15, RingImage, ring_angle, scene);
+        let MoonRing = ring_creator ('MoonRing', Distances.Moon, 0.1, RingImage, ring_angle, Earth);
+        let SaturnOuterRing = ring_creator ('SaturnOuterRing', 4, 0.8, SaturnRingImage, saturn_ring_angle, Saturn);
+    }   
 
 
     // LIGHT

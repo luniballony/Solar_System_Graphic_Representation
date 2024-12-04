@@ -51,6 +51,8 @@ export const Colors = {
 // Distances
 export let distance = 25; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 4;
+export let ring_angle = Math.PI / 2;
+export let saturn_ring_angle = Math.PI / 2 - 0.8;
 
 
 // others
