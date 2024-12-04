@@ -32,7 +32,7 @@ export const Distances = {
  
 // Colors  
 export const Colors = {
-    Sun : 0xE3AD27,
+    Sun : 0xf5c64f,
     Mercury : 0xCC0000,
     Venus : 0x0f0f0f,
     Earth : 0x4FB06D,
@@ -48,29 +48,14 @@ export const Colors = {
 };
 
 
-
-// Initial planet speed
-// set speeds as 0
-export let MercurySpeed = 0;
-export let VenusSpeed = 0;
-export let EarthSpeed = 0;
-export let MarsSpeed = 0;
-export let JupiterSpeed = 0;
-export let SaturnSpeed = 0;
-export let UranusSpeed = 0;
-export let NeptuneSpeed = 0;
-
-
 // Distances
-export let distance = 12.2; //sets distance between planets in case we want it to be the same between all
+export let distance = 25; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 4;
-
-
-
 
 
 // others
 export let r_smoothness = 70; // ring smoothness. the higher the more smooth the ring will be
+export const Shine = 18;
 
 
 

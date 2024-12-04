@@ -4,21 +4,32 @@
 
     // imports file with constants defined
     import {Sizes, Colors, Distances} from './constants.js';
-    import {distance, distance_between, r_smoothness} from './constants.js';
+    import {distance, distance_between, r_smoothness, Shine} from './constants.js';
 
-    
-    const Shine = 18;
-    const distance_2 = 4;   
+    import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
+
+
 
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 90; // positions the camera (how far/close it is to the objects)
+    camera.position.z = 50; // positions the camera (how far/close it is to the objects)
     camera.position.y = 15;
 
     const renderer = new THREE.WebGLRenderer();          
     renderer.setSize(window.innerWidth, window.innerHeight); // Defines the window size to be a square
     document.body.appendChild(renderer.domElement);
+
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+
+    // Enable or customize zoom behavior
+    controls.enableZoom = true; // This allows zooming
+    controls.zoomSpeed = 1.2;   // Adjust zoom speed (default is 1)
+
+    // Optional: Add limits to zoom
+    controls.minDistance = 10;  // Minimum zoom distance
+    controls.maxDistance = 200; // Maximum zoom distance
 
 
     // Function to set up images for objects
@@ -28,7 +39,7 @@
         image.wrapT = THREE.RepeatWrapping;  // Vertical axis (y-axis)
     
         // Set the number of repeats (adjust this based on the size of the sphere and desired effect)
-        image.repeat.set(3, 3);
+        image.repeat.set(1, 1);
         return image;
     }
 
@@ -66,7 +77,7 @@
     // Function for ring creation
     function ring_creator (r_name, r_distance, r_color) {
         const RingOuterRadius = r_distance;  
-        const RingInnerRadius = r_distance - 0.4;  
+        const RingInnerRadius = r_distance - 0.15;  
         const RingThetaSegments = r_smoothness;  // number of segments makes ring smoother    
         // Create the ring geometry
         const RingGeometry = new THREE.RingGeometry(RingInnerRadius, RingOuterRadius, RingThetaSegments);
@@ -162,10 +173,12 @@
 
 
     // LIGHT
-    const SunLight = new THREE.PointLight (0xffa500, 1, 3000);
+    const SunLight = new THREE.PointLight (Colors.Sun, 1, 3000);
     SunLight.position.set(0, 0, 0);
     scene.add (SunLight);
 
+    const ambientlight = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
+    scene.add( ambientlight );
     
     
     // Set speeds as 0
@@ -179,11 +192,32 @@
     let UranusSpeed = 0;
     let NeptuneSpeed = 0;
    
+    let planetsMove = true;
+    let planetsRotate = true;
+
+    // Get checkboxes
+    const toggleMovementCheckbox = document.getElementById('NoMovement');
+    const toggleRotationCheckbox = document.getElementById('NoRotation');
+
+    // Event listeners
+    toggleMovementCheckbox.addEventListener('change', (event) => {
+        planetsMove = !event.target.checked; // Planets move when unchecked
+    });
+
+    toggleRotationCheckbox.addEventListener('change', (event) => {
+        planetsRotate = !event.target.checked; // Planets rotate when unchecked
+    });
+
+
 
     function animate() {
         requestAnimationFrame(animate);
 
-        // the value determines the speed of rotation
+         // Update the controls
+        controls.update();
+
+        // the value determines the speed of rotation on itself
+        if (planetsRotate) {
         Mercury.rotation.y += 0.01; 
         Venus.rotation.y += 0.01; 
         Earth.rotation.y += 0.01; 
@@ -191,9 +225,11 @@
         Jupiter.rotation.y += 0.01; 
         Saturn.rotation.y += 0.01; 
         Uranus.rotation.y += 0.01; 
-        Neptune.rotation.y += 0.01; 
+        Neptune.rotation.y += 0.01;
+        }
 
-        // Update angle
+        // Update speed of rotation around sun
+        if (planetsMove) {
         MercurySpeed += 0.01;
         VenusSpeed += 0.01;
         EarthSpeed += 0.01;
@@ -202,6 +238,8 @@
         SaturnSpeed += 0.01;
         UranusSpeed += 0.01;
         NeptuneSpeed += 0.01;
+        }
+
 
         // Calculate new position to allow rotation
         Mercury.position.x = MercuryDistance * Math.cos(MercurySpeed);
