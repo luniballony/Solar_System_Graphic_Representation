@@ -8,13 +8,21 @@
 	</head>
 	<body>
         <script type="module" src="./main.js"></script>		
-		<label>
+		<label> <! -- box to stop movement -->
 			<input type="checkbox" id="NoMovement" />
 			Stop Movement
 		</label>	
-		<label>
+		<label> <! -- box to stop Rotations -->
 			<input type="checkbox" id="NoRotation" />
 			Stop Rotations
 		</label>	
+		<label>
+			<input type="checkbox" id="NoRings" />
+			Remove Rings
+		</label>	
+		<! -- stars slider -->
+		<label for="starSlider">Number of Stars:</label>
+		<input type="range" id="starSlider" min="10" max="550" value="50" step="10">
+		<span id="starCountDisplay">50</span>
 	</body>
 </html>

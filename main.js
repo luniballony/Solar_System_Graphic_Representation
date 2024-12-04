@@ -5,7 +5,6 @@
     // imports file with constants defined
     import {Sizes, Colors, Distances} from './constants.js';
     import {distance, distance_between, r_smoothness, Shine} from './constants.js';
-
     import {image_setup, planet_creator, ring_creator, distance_calculater, star_creator} from './functions.js';
 
     import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
@@ -28,8 +27,8 @@
     controls.zoomSpeed = 1.2;   // Adjust zoom speed (default is 1)
 
     // Optional: Add limits to zoom
-    controls.minDistance = 10;  // Minimum zoom distance
-    controls.maxDistance = 200; // Maximum zoom distance
+    controls.minDistance = 5;  // Minimum zoom distance
+    controls.maxDistance = 150; // Maximum zoom distance
 
 
     // Sun + Planets + Moon image set up
@@ -45,14 +44,39 @@
     let MoonImage = image_setup ("/moon.jpg");
     let SaturnRingImage = image_setup ("/saturn.jpg");
 
+
+
+        
+    //Stars creation
+    let tiny_star = star_creator (0.2, Colors.Stars, 160, 350);
+    let small_star = star_creator (0.3, Colors.Stars, 160, 350);
+    let medium_star = star_creator (0.4, Colors.Stars, 160, 350);
+    let big_star = star_creator (0.5, Colors.Stars, 160, 350);
+   
+
+    let starGroup; // Reference to the current group of stars
+
+    function updateStars() {
+        const starAmount = parseInt(starSlider.value); // Get the slider value
+        starCountDisplay.textContent = starAmount; // Update display with the current count
+    
+        // Remove the old group of stars, if any
+        if (starGroup) {
+            scene.remove(starGroup);
+        }
+    
+        // Create a new group of stars
+        starGroup = star_creator(0.3, Colors.Stars, starAmount, 250); // Adjust size, color, and range as needed
+    }
+    
+    // Attach the slider's event listener
+    starSlider.addEventListener('input', updateStars);
+    
+    // Create initial stars when the scene loads
+    updateStars();
     
 
-    // Stars creation
-    let tiny_star = star_creator (0.2, Colors.Stars, 60, 350);
-    let small_star = star_creator (0.3, Colors.Stars, 60, 350);
-    let medium_star = star_creator (0.4, Colors.Stars, 60, 350);
-    let big_star = star_creator (0.5, Colors.Stars, 60, 350);
-   
+
 
     // Planet + Sun Creation
     let Sun = planet_creator ('Sun', Sizes.Sun, SunImage); 
@@ -79,6 +103,9 @@
     Earth.add(Moon);
 
 
+
+    // currently they all have same distance between each other
+    // to change that, replace distance_between for new variable with new value
     // distances through functions
     let MercuryDistance = distance + Sizes.Mercury; // must be called like this as its the first planet
     let VenusDistance = distance_calculater (MercuryDistance, Sizes.Mercury, Sizes.Venus, distance_between);
@@ -89,17 +116,30 @@
     let UranusDistance = distance_calculater (SaturnDistance, Sizes.Saturn, Sizes.Uranus, distance_between);
     let NeptuneDistance = distance_calculater (UranusDistance, Sizes.Uranus, Sizes.Neptune, distance_between);
 
+    
+    let ringsOn = true;
+
+    // Get checkboxes
+    const toggleNoRingsCheckbox = document.getElementById('NoRings');
+
+    // Event listeners
+    toggleNoRingsCheckbox.addEventListener('change', (event) => {
+        ringsOn = !event.target.checked; // rings appear when unchecked
+    });
 
     // Rings Creation
-    let MercuryRing = ring_creator ('MercuryRing', MercuryDistance, Colors.Rings);
-    let VenusRing = ring_creator ('VenusRing', VenusDistance, Colors.Rings);
-    let EarthRing = ring_creator ('EarthRing', EarthDistance, Colors.Rings);
-    let MarsRing = ring_creator ('MarsRing', MarsDistance, Colors.Rings);
-    let JupiterRing = ring_creator ('JupiterRing', JupiterDistance, Colors.Rings);
-    let SaturnRing = ring_creator ('SaturnRing', SaturnDistance, Colors.Rings);
-    let UranusRing = ring_creator ('UranusRing', UranusDistance, Colors.Rings);
-    let NeptuneRing = ring_creator ('NeptuneRing', NeptuneDistance, Colors.Rings);
+    if (ringsOn) {
+        let MercuryRing = ring_creator ('MercuryRing', MercuryDistance, Colors.Rings);
+        let VenusRing = ring_creator ('VenusRing', VenusDistance, Colors.Rings);
+        let EarthRing = ring_creator ('EarthRing', EarthDistance, Colors.Rings);
+        let MarsRing = ring_creator ('MarsRing', MarsDistance, Colors.Rings);
+        let JupiterRing = ring_creator ('JupiterRing', JupiterDistance, Colors.Rings);
+        let SaturnRing = ring_creator ('SaturnRing', SaturnDistance, Colors.Rings);
+        let UranusRing = ring_creator ('UranusRing', UranusDistance, Colors.Rings);
+        let NeptuneRing = ring_creator ('NeptuneRing', NeptuneDistance, Colors.Rings);
+    }
 
+    
 
     // Saturn Outer Ring 
     const SaturnOuterRingOuterRadius = 4;  
@@ -156,6 +196,9 @@
     });
 
 
+   
+
+
 
     function animate() {
         requestAnimationFrame(animate);
@@ -165,26 +208,26 @@
 
         // the value determines the speed of rotation on itself
         if (planetsRotate) {
-        Mercury.rotation.y += 0.01; 
-        Venus.rotation.y += 0.01; 
-        Earth.rotation.y += 0.01; 
-        Mars.rotation.y += 0.01; 
-        Jupiter.rotation.y += 0.01; 
-        Saturn.rotation.y += 0.01; 
-        Uranus.rotation.y += 0.01; 
-        Neptune.rotation.y += 0.01;
+            Mercury.rotation.y += 0.01; 
+            Venus.rotation.y += 0.01; 
+            Earth.rotation.y += 0.01; 
+            Mars.rotation.y += 0.01; 
+            Jupiter.rotation.y += 0.01; 
+            Saturn.rotation.y += 0.01; 
+            Uranus.rotation.y += 0.01; 
+            Neptune.rotation.y += 0.01;
         }
 
         // Update speed of rotation around sun
         if (planetsMove) {
-        MercurySpeed += 0.01;
-        VenusSpeed += 0.01;
-        EarthSpeed += 0.01;
-        MarsSpeed += 0.01;
-        JupiterSpeed += 0.01;
-        SaturnSpeed += 0.01;
-        UranusSpeed += 0.01;
-        NeptuneSpeed += 0.01;
+            MercurySpeed += 0.01;
+            VenusSpeed += 0.01;
+            EarthSpeed += 0.01;
+            MarsSpeed += 0.01;
+            JupiterSpeed += 0.01;
+            SaturnSpeed += 0.01;
+            UranusSpeed += 0.01;
+            NeptuneSpeed += 0.01;
         }
 
 

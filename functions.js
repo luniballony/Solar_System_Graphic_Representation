@@ -60,8 +60,7 @@ export function ring_creator (r_name, r_distance, r_color) {
     return ring_mesh;
 }
 
-// currently they all have same distance between each other
-// to change that, replace distance_2 for new variable with new value
+
 // format: Previous_dist + previous_plan_radius + current_plan_radius + distance_between_plan
 // allows for modifications done to variables like distance_between and therefore to have an effect
 export function distance_calculater (Previous_dist, previous_plan_radius, current_plan_radius, distance_between_plan) {
@@ -71,31 +70,25 @@ export function distance_calculater (Previous_dist, previous_plan_radius, curren
 
 
 
-// Function to create stars
-export  function star_creator(s_size, s_color, s_amount, range) {
-    const starGroup = new THREE.Group(); // Group to manage all stars together (optional)
-
-    for (let n = 0; n < s_amount; n++) {
-        const s_geometry = new THREE.SphereGeometry(s_size, 30, 30);
+export function star_creator(s_size, s_color, s_amount, range) {
+    const starGroup = new THREE.Group(); // Create a group to manage all stars
+    for (let i = 0; i < s_amount; i++) {
+        const s_geometry = new THREE.SphereGeometry(s_size, 1, 1); // Smooth stars
         const s_material = new THREE.MeshPhongMaterial({
             color: s_color,
-            specular: 0xffffff,
-            shininess: 30,
+            shininess: 50, // Small shine for a glowing effect
         });
-
         const s_mesh = new THREE.Mesh(s_geometry, s_material);
 
-        // Generate random positions for the star
-        const x = (Math.random() - 0.5) * range; // Random number between -100 and 100
-        const y = (Math.random() - 0.5) * range;
-        const z = (Math.random() - 0.5) * range;
+        // Randomize position within a cube-like range
+        s_mesh.position.set(
+            (Math.random() - 0.5) * range, // Randomize X
+            (Math.random() - 0.5) * range, // Randomize Y
+            (Math.random() - 0.5) * range  // Randomize Z
+        );
 
-        s_mesh.position.set(x, y, z); // Set random position
-        scene.add(s_mesh); // Add the star to the scene
-
-        starGroup.add(s_mesh); // Add star to the group (optional)
+        starGroup.add(s_mesh); // Add each star to the group
     }
-
-    scene.add(starGroup); // Add the group to the scene (optional)
-    return starGroup; // Return the group of stars (optional)
+    scene.add(starGroup); // Add the group to the scene
+    return starGroup;
 }
