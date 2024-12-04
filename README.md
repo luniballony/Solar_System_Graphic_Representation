@@ -17,7 +17,10 @@ Features to add:
 - create slider to control number of stars (optional)
 - create moon (DONE)
 - option for realistic version
-    - botton to remove rings 
+    - botton to remove rings
+    - realistic movement speed
+    - realistic size
+    - realistic distances
 - add scroll wheel control (DONE)
 
 Optimizations: 
