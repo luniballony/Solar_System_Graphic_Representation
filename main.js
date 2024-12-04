@@ -9,8 +9,6 @@
     import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
 
-
-
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 50; // positions the camera (how far/close it is to the objects)
@@ -105,6 +103,40 @@
         return random;
     }; 
 
+
+    // Function to create stars
+    function star_creator(s_size, s_color, s_amount, range) {
+        const starGroup = new THREE.Group(); // Group to manage all stars together (optional)
+    
+        for (let n = 0; n < s_amount; n++) {
+            const s_geometry = new THREE.SphereGeometry(s_size, 30, 30);
+            const s_material = new THREE.MeshPhongMaterial({
+                color: s_color,
+                specular: 0xffffff,
+                shininess: 30,
+            });
+    
+            const s_mesh = new THREE.Mesh(s_geometry, s_material);
+    
+            // Generate random positions for the star
+            const x = (Math.random() - 0.5) * range; // Random number between -100 and 100
+            const y = (Math.random() - 0.5) * range;
+            const z = (Math.random() - 0.5) * range;
+    
+            s_mesh.position.set(x, y, z); // Set random position
+            scene.add(s_mesh); // Add the star to the scene
+    
+            starGroup.add(s_mesh); // Add star to the group (optional)
+        }
+    
+        scene.add(starGroup); // Add the group to the scene (optional)
+        return starGroup; // Return the group of stars (optional)
+    }
+    
+    let tiny_star = star_creator (0.2, Colors.Stars, 120, 350);
+    let small_star = star_creator (0.3, Colors.Stars, 120, 350);
+    let medium_star = star_creator (0.4, Colors.Stars, 100, 350);
+    let big_star = star_creator (0.5, Colors.Stars, 60, 350);
    
 
     // Planet + Sun Creation
