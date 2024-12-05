@@ -16,6 +16,8 @@ export let Sizes = {
     Moon: 0.002,
 };
 
+
+
 // Distances - the distances shall be calculated as distance * specific_planet so that the slider is easier to code
 export const Distances = {
     Mercury : 2,
@@ -30,6 +32,26 @@ export const Distances = {
     SaturnOuterRing: 3,
 };
  
+
+
+// Scale for distances
+export const DistancesScale = {
+    Mercury : 0.4,
+    Venus : 0.7,
+    Earth : 1,
+    Mars : 1.5,
+    Jupiter : 2.8,
+    Saturn : 5.2,
+    Uranus : 9.6,
+    Neptune : 30,
+    Moon: 3,
+    SaturnOuterRing: 3,
+};
+
+
+
+
+
 // Colors  
 export const Colors = {
     Sun : 0xf5c64f,
@@ -51,13 +73,17 @@ export const Colors = {
 // Distances
 export let distance = 25; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 4;
+export let realistic_distance = 10;
 export let ring_angle = Math.PI / 2;
 export let saturn_ring_angle = Math.PI / 2 - 0.8;
 
 
 // others
 export let r_smoothness = 70; // ring smoothness. the higher the more smooth the ring will be
+export let r_thickness = 0.002 * Sizes.Sun;
+
 export const Shine = 18;
+
 
 
 

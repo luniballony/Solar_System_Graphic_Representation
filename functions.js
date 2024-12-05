@@ -64,7 +64,7 @@ export function ring_creator (r_name, r_distance, r_thickness, r_image, r_angle,
 // format: Previous_dist + previous_plan_radius + current_plan_radius + distance_between_plan
 // allows for modifications done to variables like distance_between and therefore to have an effect
 export function distance_calculater (Previous_dist, previous_plan_radius, current_plan_radius, distance_between_plan) {
-    let random = previous_plan_radius + current_plan_radius + distance_between_plan + Previous_dist;
+    let random = previous_plan_radius + current_plan_radius  + Previous_dist + distance_between_plan;
     return random;
 }; 
 
