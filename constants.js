@@ -38,7 +38,7 @@ export const Distances = {
 export const DistancesScale = {
     Mercury : 0.4,
     Venus : 0.7,
-    Earth : 1,
+    Earth : 1, // Base Distance
     Mars : 1.5,
     Jupiter : 2.8,
     Saturn : 5.2,
@@ -46,6 +46,19 @@ export const DistancesScale = {
     Neptune : 30,
     Moon: 3,
     SaturnOuterRing: 3,
+};
+
+
+export let SpeedScale = {
+
+    Mercury: 1.59,
+    Venus: 1.17,
+    Earth: 1, // Base speed
+    Mars: 0.81,
+    Jupiter: 0.44,
+    Saturn: 0.33,
+    Uranus: 0.23,
+    Neptune: 0.18,
 };
 
 
@@ -71,7 +84,7 @@ export const Colors = {
 
 
 // Distances
-export let distance = 25; //sets distance between planets in case we want it to be the same between all
+export let distance = Sizes.Sun + 20; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 4;
 export let realistic_distance = 10;
 export let ring_angle = Math.PI / 2;
@@ -80,7 +93,7 @@ export let saturn_ring_angle = Math.PI / 2 - 0.8;
 
 // others
 export let r_smoothness = 70; // ring smoothness. the higher the more smooth the ring will be
-export let r_thickness = 0.002 * Sizes.Sun;
+export let r_thickness = 0.005 * Sizes.Sun;
 
 export const Shine = 18;
 

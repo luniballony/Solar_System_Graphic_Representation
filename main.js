@@ -4,7 +4,7 @@
 
     // imports file with constants defined
     import {Sizes, Colors, Distances, DistancesScale} from './constants.js';
-    import {distance, distance_between, r_smoothness, ring_angle, saturn_ring_angle, r_thickness, realistic_distance} from './constants.js';
+    import {distance, distance_between, r_smoothness, ring_angle, saturn_ring_angle, r_thickness, realistic_distance, SpeedScale} from './constants.js';
     import {image_setup, planet_creator, ring_creator, distance_calculater, star_creator} from './functions.js';
 
     import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
@@ -261,29 +261,29 @@
 
 
         // Calculate new position to allow rotation
-        Mercury.position.x = MercuryDistance * Math.cos(MercurySpeed);
-        Mercury.position.z = MercuryDistance * Math.sin(MercurySpeed);
+        Mercury.position.x = MercuryDistance * Math.cos(MercurySpeed * SpeedScale.Mercury);
+        Mercury.position.z = MercuryDistance * Math.sin(MercurySpeed * SpeedScale.Mercury);
 
-        Venus.position.x = VenusDistance * Math.cos(VenusSpeed);
-        Venus.position.z = VenusDistance  * Math.sin(VenusSpeed);
+        Venus.position.x = VenusDistance * Math.cos(VenusSpeed * SpeedScale.Venus);
+        Venus.position.z = VenusDistance  * Math.sin(VenusSpeed * SpeedScale.Venus);
 
-        Earth.position.x = EarthDistance  * Math.cos(EarthSpeed);
-        Earth.position.z = EarthDistance  * Math.sin(EarthSpeed);
+        Earth.position.x = EarthDistance  * Math.cos(EarthSpeed * SpeedScale.Earth);
+        Earth.position.z = EarthDistance  * Math.sin(EarthSpeed * SpeedScale.Earth);
 
-        Mars.position.x = MarsDistance  * Math.cos(MarsSpeed);
-        Mars.position.z = MarsDistance  * Math.sin(MarsSpeed);
+        Mars.position.x = MarsDistance  * Math.cos(MarsSpeed * SpeedScale.Mars);
+        Mars.position.z = MarsDistance  * Math.sin(MarsSpeed * SpeedScale.Mars);
 
-        Jupiter.position.x = JupiterDistance  * Math.cos(JupiterSpeed);
-        Jupiter.position.z = JupiterDistance  * Math.sin(JupiterSpeed);
+        Jupiter.position.x = JupiterDistance  * Math.cos(JupiterSpeed * SpeedScale.Jupiter);
+        Jupiter.position.z = JupiterDistance  * Math.sin(JupiterSpeed * SpeedScale.Jupiter);
 
-        Saturn.position.x = SaturnDistance  * Math.cos(SaturnSpeed);
-        Saturn.position.z = SaturnDistance  * Math.sin(SaturnSpeed);
+        Saturn.position.x = SaturnDistance  * Math.cos(SaturnSpeed * SpeedScale.Saturn);
+        Saturn.position.z = SaturnDistance  * Math.sin(SaturnSpeed * SpeedScale.Saturn);
 
-        Uranus.position.x = UranusDistance  * Math.cos(UranusSpeed);
-        Uranus.position.z = UranusDistance  * Math.sin(UranusSpeed);
+        Uranus.position.x = UranusDistance  * Math.cos(UranusSpeed * SpeedScale.Uranus);
+        Uranus.position.z = UranusDistance  * Math.sin(UranusSpeed * SpeedScale.Uranus);
 
-        Neptune.position.x = NeptuneDistance  * Math.cos(NeptuneSpeed);
-        Neptune.position.z = NeptuneDistance  * Math.sin(NeptuneSpeed);
+        Neptune.position.x = NeptuneDistance  * Math.cos(NeptuneSpeed * SpeedScale.Neptune);
+        Neptune.position.z = NeptuneDistance  * Math.sin(NeptuneSpeed * SpeedScale.Neptune);
 
         renderer.render(scene, camera);
 
