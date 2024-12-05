@@ -30,8 +30,11 @@
     controls.minDistance = 5;  // Minimum zoom distance
     controls.maxDistance = 150; // Maximum zoom distance
 
+    // Get slider and display elements
+    const speedSlider = document.getElementById('speedSlider');
+    const speedDisplay = document.getElementById('speedDisplay');
 
-    
+   
 
     // STARS
     // Reference to the current group of stars
@@ -40,7 +43,7 @@
     let big_star;
     
 
-    function updateStars() {
+    function update_stars() {
         const starAmount = parseInt(starSlider.value); // Get the slider value
         starCountDisplay.textContent = starAmount; // Update display with the current count
     
@@ -58,11 +61,10 @@
     }
     
     // Attach the slider's event listener
-    starSlider.addEventListener('input', updateStars);
+    starSlider.addEventListener('input', update_stars);
     // Create initial stars when the scene loads
-    updateStars();
+    update_stars();
     
-
 
 
 
@@ -95,7 +97,7 @@
     let Neptune = planet_creator ('Neptune', Sizes.Neptune, NeptuneImage, 0, scene);
     let Moon = planet_creator ('Moon', Sizes.Moon, MoonImage, Distances.Moon, Earth);
 
-    // Set to day time 
+    // Set earth to day time 
     let earthNightTime = true;
 
     const toggleNightTime = document.getElementById('DayTime');
@@ -107,6 +109,7 @@
         Earth.material.map = newEarthImage; // updates the image
         Earth.material.needsUpdate = true;   // Ensure the material updates
     });
+
 
 
     // DISTANCES
@@ -148,14 +151,8 @@
     }   
 
 
-    // LIGHT
-    const SunLight = new THREE.PointLight (Colors.Sun, 1, 3000);
-    SunLight.position.set(0, 0, 0);
-    scene.add (SunLight);
-    const ambientlight = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
-    scene.add( ambientlight );
-    
-    
+
+    // SPEEDS
     // Set speeds as 0
     // must be set in this file due to later modifications to variables
     let MercurySpeed = 0;
@@ -166,7 +163,37 @@
     let SaturnSpeed = 0;
     let UranusSpeed = 0;
     let NeptuneSpeed = 0;
+
+    let planet_speed = parseFloat (speedSlider.value);
+
+    function control_planet_speed () {
+        planet_speed = parseFloat(speedSlider.value); // Update the global speed
+        speedDisplay.textContent = planet_speed.toFixed(5); // Display with 2 decimal places
+
+        MercurySpeed = planet_speed; // Update Mercury's speed directly
+        VenusSpeed = planet_speed;
+        EarthSpeed = planet_speed;
+        MarsSpeed = planet_speed;
+        JupiterSpeed = planet_speed;
+        SaturnSpeed = planet_speed;
+        UranusSpeed = planet_speed;
+        NeptuneSpeed = planet_speed;
+    }
+    
+    // Attach event listener to slider
+    speedSlider.addEventListener('input', control_planet_speed);
+    control_planet_speed();
    
+
+
+
+    // LIGHT
+    const SunLight = new THREE.PointLight (Colors.Sun, 1, 3000);
+    SunLight.position.set(0, 0, 0);
+    scene.add (SunLight);
+    const ambientlight = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
+    scene.add( ambientlight );
+    
 
 
     // Botton to stop planets
@@ -207,14 +234,14 @@
 
         // Update speed of rotation around sun
         if (planetsMove) {
-            MercurySpeed += 0.01;
-            VenusSpeed += 0.01;
-            EarthSpeed += 0.01;
-            MarsSpeed += 0.01;
-            JupiterSpeed += 0.01;
-            SaturnSpeed += 0.01;
-            UranusSpeed += 0.01;
-            NeptuneSpeed += 0.01;
+            MercurySpeed += planet_speed;
+            VenusSpeed += planet_speed;
+            EarthSpeed += planet_speed;
+            MarsSpeed += planet_speed;
+            JupiterSpeed += planet_speed;
+            SaturnSpeed += planet_speed;
+            UranusSpeed += planet_speed;
+            NeptuneSpeed += planet_speed;
         }
 
 
@@ -222,11 +249,11 @@
         Mercury.position.x = MercuryDistance * Math.cos(MercurySpeed);
         Mercury.position.z = MercuryDistance * Math.sin(MercurySpeed);
 
-        Venus.position.x = VenusDistance * Math.cos(MercurySpeed);
-        Venus.position.z = VenusDistance  * Math.sin(MercurySpeed);
+        Venus.position.x = VenusDistance * Math.cos(VenusSpeed);
+        Venus.position.z = VenusDistance  * Math.sin(VenusSpeed);
 
         Earth.position.x = EarthDistance  * Math.cos(EarthSpeed);
-        Earth.position.z = EarthDistance  * Math.sin(MercurySpeed);
+        Earth.position.z = EarthDistance  * Math.sin(EarthSpeed);
 
         Mars.position.x = MarsDistance  * Math.cos(MarsSpeed);
         Mars.position.z = MarsDistance  * Math.sin(MarsSpeed);
