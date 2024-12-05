@@ -8,25 +8,29 @@
 	</head>
 	<body>
         <script type="module" src="./main.js"></script>		
-		<label> <! -- box to stop movement -->
+		<label> <! -- botton to stop movement -->
 			<input type="checkbox" id="NoMovement" />
 			Stop Movement
 		</label>	
-		<label> <! -- box to stop Rotations -->
+		<label> <! -- botton to stop rotations -->
 			<input type="checkbox" id="NoRotation" />
 			Stop Rotations
 		</label>	
-		<label>
+		<label> <! -- botton to hide rings -->
 			<input type="checkbox" id="NoRings" />
 			Remove Rings
 		</label>	
-		<label>
+		<label> <! -- Day time / night time botton  -->
 			<input type="checkbox" id="DayTime" />
 			Set to Day Time
 		</label>	
 		<! -- stars slider -->
 		<label for="starSlider">Number of Stars:</label>
 		<input type="range" id="starSlider" min="0" max="300" value="100" step="10">
+		<span id="starCountDisplay">50</span>
+		<! -- speed slider -->
+		<label for="speedSlider">Speed of Planets:</label>
+		<input type="range" id="speedSlider" min="0" max="300" value="100" step="10">
 		<span id="starCountDisplay">50</span>
 	</body>
 </html>
