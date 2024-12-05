@@ -13,9 +13,10 @@ Features to add:
 
 
 Optimizations: 
-- add option for daytime and nightitme in planet earth
 - stop rotation of saturn ring
 - add a yearly counter 
+- add a sphere as a background and set it as milky way
+    - add a botton to disable it
 
 Fixes: 
 - fix "NoRings" botton
@@ -40,6 +41,7 @@ Done:
 - add texture + imagine for each planet and sun (DONE)
 - create moon (DONE)
 - add scroll wheel control (DONE)
+- add option for daytime and nightitme in planet earth (DONE)
 
 
 Project started on november 28 of 2024

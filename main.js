@@ -63,19 +63,7 @@
     updateStars();
     
 
-    // Set to day time 
-    let earthNightTime = true;
 
-    const toggleNightTime = document.getElementById('DayTime');
-    toggleNightTime.addEventListener ('change', (event) => {
-        earthNightTime = !event.target.checked;
-
-        // Swap texture on Earth material
-        const newEarthTexture = earthNightTime ? EarthImageNight : EarthImageDay;
-        Earth.material.map = newEarthTexture; // Change the texture
-        Earth.material.needsUpdate = true;   // Ensure the material updates
-
-    });
 
 
     // PLANETS + SUN + MOON
@@ -106,6 +94,19 @@
     let Uranus = planet_creator ('Uranus', Sizes.Uranus, UranusImage, 0, scene);
     let Neptune = planet_creator ('Neptune', Sizes.Neptune, NeptuneImage, 0, scene);
     let Moon = planet_creator ('Moon', Sizes.Moon, MoonImage, Distances.Moon, Earth);
+
+    // Set to day time 
+    let earthNightTime = true;
+
+    const toggleNightTime = document.getElementById('DayTime');
+    toggleNightTime.addEventListener ('change', (event) => {
+        earthNightTime = !event.target.checked;
+
+        // Swap texture on Earth material
+        const newEarthImage = earthNightTime ? EarthImageNight : EarthImageDay;
+        Earth.material.map = newEarthImage; // updates the image
+        Earth.material.needsUpdate = true;   // Ensure the material updates
+    });
 
 
     // DISTANCES
