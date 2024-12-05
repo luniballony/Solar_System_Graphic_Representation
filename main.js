@@ -63,13 +63,28 @@
     updateStars();
     
 
+    // Set to day time 
+    let earthNightTime = true;
+
+    const toggleNightTime = document.getElementById('DayTime');
+    toggleNightTime.addEventListener ('change', (event) => {
+        earthNightTime = !event.target.checked;
+
+        // Swap texture on Earth material
+        const newEarthTexture = earthNightTime ? EarthImageNight : EarthImageDay;
+        Earth.material.map = newEarthTexture; // Change the texture
+        Earth.material.needsUpdate = true;   // Ensure the material updates
+
+    });
+
 
     // PLANETS + SUN + MOON
     // Sun + Planets + Moon image set up
     let SunImage = image_setup ("/sun.jpg");
     let MercuryImage = image_setup ("/mercury.jpg");
     let VenusImage = image_setup ("/venus.jpg");
-    let EarthImage = image_setup ("/earth.jpg");
+    let EarthImageNight = image_setup ("/earthnight.jpg");
+    let EarthImageDay = image_setup ("/earthday.jpg");
     let MarsImage = image_setup ("/mars.jpg");
     let JupiterImage = image_setup ("/jupiter.jpg");
     let SaturnImage = image_setup ("/saturn.jpg");
@@ -79,11 +94,12 @@
     let SaturnRingImage = image_setup ("/saturnring.png");
     let RingImage = image_setup ("/ring.png");
 
+
     // Planet + Sun + Moon Creation
     let Sun = planet_creator ('Sun', Sizes.Sun, SunImage, 0, scene); 
     let Mercury = planet_creator ('Mercury', Sizes.Mercury, MercuryImage, 0, scene);
     let Venus = planet_creator ('Venus', Sizes.Venus, VenusImage, 0, scene);
-    let Earth = planet_creator ('Earth', Sizes.Earth, EarthImage, 0, scene);
+    let Earth = planet_creator ('Earth', Sizes.Earth, EarthImageNight, 0, scene);
     let Mars = planet_creator ('Mars', Sizes.Mars, MarsImage, 0, scene);
     let Jupiter = planet_creator ('Jupiter', Sizes.Jupiter, JupiterImage, 0, scene);
     let Saturn = planet_creator ('Saturn', Sizes.Saturn, SaturnImage, 0, scene);
@@ -166,6 +182,7 @@
     toggleRotationCheckbox.addEventListener('change', (event) => {
         planetsRotate = !event.target.checked; // Planets rotate when unchecked
     });
+
 
 
 
