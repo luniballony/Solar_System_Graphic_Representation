@@ -85,17 +85,18 @@
     let RingImage = image_setup ("/ring.png");
 
 
+
     // Planet + Sun + Moon Creation
     let Sun = planet_creator ('Sun', Sizes.Sun, SunImage, 0, scene); 
-    let Mercury = planet_creator ('Mercury', Sizes.Mercury, MercuryImage, 0, scene);
-    let Venus = planet_creator ('Venus', Sizes.Venus, VenusImage, 0, scene);
-    let Earth = planet_creator ('Earth', Sizes.Earth, EarthImageNight, 0, scene);
-    let Mars = planet_creator ('Mars', Sizes.Mars, MarsImage, 0, scene);
-    let Jupiter = planet_creator ('Jupiter', Sizes.Jupiter, JupiterImage, 0, scene);
-    let Saturn = planet_creator ('Saturn', Sizes.Saturn, SaturnImage, 0, scene);
-    let Uranus = planet_creator ('Uranus', Sizes.Uranus, UranusImage, 0, scene);
-    let Neptune = planet_creator ('Neptune', Sizes.Neptune, NeptuneImage, 0, scene);
-    let Moon = planet_creator ('Moon', Sizes.Moon, MoonImage, Distances.Moon, Earth);
+    let Mercury = planet_creator ('Mercury', Sizes.Sun * Sizes.Mercury , MercuryImage, 0, scene);
+    let Venus = planet_creator ('Venus', Sizes.Sun * Sizes.Venus, VenusImage, 0, scene);
+    let Earth = planet_creator ('Earth', Sizes.Sun * Sizes.Earth, EarthImageNight, 0, scene);
+    let Mars = planet_creator ('Mars', Sizes.Sun *  Sizes.Mars, MarsImage, 0, scene);
+    let Jupiter = planet_creator ('Jupiter', Sizes.Sun * Sizes.Jupiter, JupiterImage, 0, scene);
+    let Saturn = planet_creator ('Saturn', Sizes.Sun * Sizes.Saturn, SaturnImage, 0, scene);
+    let Uranus = planet_creator ('Uranus', Sizes.Sun * Sizes.Uranus, UranusImage, 0, scene);
+    let Neptune = planet_creator ('Neptune', Sizes.Sun * Sizes.Neptune, NeptuneImage, 0, scene);
+    let Moon = planet_creator ('Moon', Sizes.Sun * Sizes.Moon, MoonImage, Distances.Moon, Earth);
 
     // Set earth to day time 
     let earthNightTime = true;
@@ -147,7 +148,7 @@
         let UranusRing = ring_creator ('UranusRing', UranusDistance, 0.15, RingImage, ring_angle, scene);
         let NeptuneRing = ring_creator ('NeptuneRing', NeptuneDistance, 0.15, RingImage, ring_angle, scene);
         let MoonRing = ring_creator ('MoonRing', Distances.Moon, 0.1, RingImage, ring_angle, Earth);
-        let SaturnOuterRing = ring_creator ('SaturnOuterRing', 4, 0.8, SaturnRingImage, saturn_ring_angle, Saturn);
+        let SaturnOuterRing = ring_creator ('SaturnOuterRing', Sizes.Saturn + 1 , 0.8, SaturnRingImage, saturn_ring_angle, Saturn); 
     }   
 
 

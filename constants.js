@@ -2,18 +2,18 @@
 // dont forget to add the list name to the index.html file
 
 // Sizes 
-export const Sizes = {
-    Sun : 12,
-    Mercury: 1,
-    Venus: 1,
-    Earth: 2,
-    Mars: 2,
-    Jupiter: 4,
-    Saturn: 3,
-    Uranus: 3,
-    Neptune: 2.5,
+export let Sizes = {
+    Sun : 20,
+    Mercury: 0.004,
+    Venus: 0.01,
+    Earth: 0.01,
+    Mars: 0.005,
+    Jupiter: 0.1,
+    Saturn: 0.09,
+    Uranus: 0.04,
+    Neptune: 0.04,
     Stars: 4,
-    Moon: 0.5,
+    Moon: 0.002,
 };
 
 // Distances - the distances shall be calculated as distance * specific_planet so that the slider is easier to code
