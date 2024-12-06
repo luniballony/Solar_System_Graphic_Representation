@@ -110,10 +110,51 @@
         Earth.material.map = newEarthImage; // updates the image
         Earth.material.needsUpdate = true;   // Ensure the material updates
     });
+ 
+    /* let RealisticMode = false; 
+
+    const toggleRealisticMode = document.getElementById('RealisticMode');
+    toggleRealisticMode.addEventListener ('change', (event) => {
+        RealisticMode = !event.target.checked;
+
+
+        // update sun size
+        let RealisticSun = 10;
+        Sun.SphereGeometry = (RealisticSun, 30, 30);
+        Sun.SphereGeometry.needsUpdate = true;
+
+        // update distance
+        MercuryDistance = RealisticMercuryDistance;
+        VenusDistance = RealisticVenusDistance;
+        EarthDistance = RealisticEarthDistance;
+        MarsDistance = RealisticMarsDistance;
+        JupiterDistance = RealisticJupiterDistance;
+        SaturnDistance = RealisticSaturnDistance;
+        UranusDistance = RealisticUranusDistance;
+        NeptuneDistance = RealisticNeptuneDistance;
+
+        // update rings
+        MercuryRing.RingOuterRadius = MercuryDistance;
+        Mercury.RingOuterRadius.needsUpdate = true;
+        // update speed
+
+
+    }); */
 
 
 
     // DISTANCES
+    // Distances for realistic mode
+    let RealisticMercuryDistance = DistancesScale.Mercury * realistic_distance;
+    let RealisticVenusDistance = DistancesScale.Venus * realistic_distance;
+    let RealisticEarthDistance = DistancesScale.Earth * realistic_distance;
+    let RealisticMarsDistance = DistancesScale.Mars * realistic_distance;
+    let RealisticJupiterDistance = DistancesScale.Jupiter * realistic_distance;
+    let RealisticSaturnDistance = DistancesScale.Saturn * realistic_distance;
+    let RealisticUranusDistance = DistancesScale.Uranus * realistic_distance;
+    let RealisticNeptuneDistance = DistancesScale.Neptune * realistic_distance;
+
+
     // currently they all have same distance between each other
     // to change that, replace distance_between for new variable with new value
     // distances through functions
@@ -129,15 +170,6 @@
     
 
 
-    // Distances for realistic mode
-    let RealisticMercuryDistance = DistancesScale.Mercury * realistic_distance;
-    let RealisticVenusDistance = DistancesScale.Venus * realistic_distance;
-    let RealisticEarthDistance = DistancesScale.Earth * realistic_distance;
-    let RealisticMarsDistance = DistancesScale.Mars * realistic_distance;
-    let RealisticJupiterDistance = DistancesScale.Jupiter * realistic_distance;
-    let RealisticSaturnDistance = DistancesScale.Saturn * realistic_distance;
-    let RealisticUranusDistance = DistancesScale.Uranus * realistic_distance;
-    let RealisticNeptuneDistance = DistancesScale.Neptune * realistic_distance;
 
 
     
