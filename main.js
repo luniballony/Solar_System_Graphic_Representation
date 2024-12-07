@@ -111,35 +111,6 @@
         Earth.material.needsUpdate = true;   // Ensure the material updates
     });
  
-    /* let RealisticMode = false; 
-
-    const toggleRealisticMode = document.getElementById('RealisticMode');
-    toggleRealisticMode.addEventListener ('change', (event) => {
-        RealisticMode = !event.target.checked;
-
-
-        // update sun size
-        let RealisticSun = 10;
-        Sun.SphereGeometry = (RealisticSun, 30, 30);
-        Sun.SphereGeometry.needsUpdate = true;
-
-        // update distance
-        MercuryDistance = RealisticMercuryDistance;
-        VenusDistance = RealisticVenusDistance;
-        EarthDistance = RealisticEarthDistance;
-        MarsDistance = RealisticMarsDistance;
-        JupiterDistance = RealisticJupiterDistance;
-        SaturnDistance = RealisticSaturnDistance;
-        UranusDistance = RealisticUranusDistance;
-        NeptuneDistance = RealisticNeptuneDistance;
-
-        // update rings
-        MercuryRing.RingOuterRadius = MercuryDistance;
-        Mercury.RingOuterRadius.needsUpdate = true;
-        // update speed
-
-
-    }); */
 
 
 
@@ -258,6 +229,39 @@
         planetsRotate = !event.target.checked; // Planets rotate when unchecked
     });
 
+
+
+    // Realistic Mode
+    let RealisticMode = false; 
+
+
+    const toggleRealisticMode = document.getElementById('RealisticMode');
+    toggleRealisticMode.addEventListener ('change', (event) => {
+        RealisticMode = !event.target.checked;
+
+
+        // update sun size
+        const RealisticSun = 10; 
+        const RealisticSunGeometry = new THREE.SphereGeometry(RealisticSun, 30, 30);
+        Sun.geometry = RealisticSunGeometry;
+        Sun.geometry.needsUpdate = true;
+        
+
+        // update distance
+        MercuryDistance = RealisticMercuryDistance;
+        VenusDistance = RealisticVenusDistance;
+        EarthDistance = RealisticEarthDistance;
+        MarsDistance = RealisticMarsDistance;
+        JupiterDistance = RealisticJupiterDistance;
+        SaturnDistance = RealisticSaturnDistance;
+        UranusDistance = RealisticUranusDistance;
+        NeptuneDistance = RealisticNeptuneDistance;
+
+        // update rings
+        // update speed
+
+
+    }); 
 
 
 

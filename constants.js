@@ -63,8 +63,6 @@ export let SpeedScale = {
 
 
 
-
-
 // Colors  
 export const Colors = {
     Sun : 0xf5c64f,
@@ -86,7 +84,7 @@ export const Colors = {
 // Distances
 export let distance = Sizes.Sun + 20; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 4;
-export let realistic_distance = 10;
+export let realistic_distance = 75; // if sun ray = 10 with Sun-Mercury = 20
 export let ring_angle = Math.PI / 2;
 export let saturn_ring_angle = Math.PI / 2 - 0.8;
 
