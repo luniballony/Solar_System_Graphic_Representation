@@ -2,12 +2,12 @@
 // imports file with constants defined
 import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
 import {Sizes, Colors, Distances} from './constants.js';
-import {distance, distance_between, r_smoothness, Shine} from './constants.js';
+import {default_distance, distance_between, r_smoothness, Shine} from './constants.js';
 import {scene} from './main.js';
 
 import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
-
+ 
 // Function to set up images for objects
 export function image_setup (image_path) {
     const image = new THREE.TextureLoader().load(image_path);

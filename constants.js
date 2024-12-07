@@ -3,7 +3,7 @@
 
 // Sizes 
 export let Sizes = {
-    Sun : 20,
+    Sun : 16,
     Mercury: 0.004,
     Venus: 0.01,
     Earth: 0.01,
@@ -82,7 +82,7 @@ export const Colors = {
 
 
 // Distances
-export let distance = Sizes.Sun + 20; //sets distance between planets in case we want it to be the same between all
+export let default_distance = Sizes.Sun + 20; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 4;
 export let realistic_distance = 75; // if sun ray = 10 with Sun-Mercury = 20
 export let ring_angle = Math.PI / 2;
