@@ -44,7 +44,7 @@ export const DistancesScale = {
     Saturn : 5.2,
     Uranus : 9.6,
     Neptune : 30,
-    Moon: 3,
+    Moon: 0.5,
     SaturnOuterRing: 3,
 };
 
