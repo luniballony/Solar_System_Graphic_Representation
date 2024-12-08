@@ -69,7 +69,7 @@ export function distance_calculater (Previous_dist, previous_plan_radius, curren
 }; 
 
 
-
+// star creation
 export function star_creator(s_size, s_color, s_amount, range) {
     const starGroup = new THREE.Group(); // Create a group to manage all stars
     for (let i = 0; i < s_amount; i++) {
@@ -91,4 +91,30 @@ export function star_creator(s_size, s_color, s_amount, range) {
     }
     scene.add(starGroup); // Add the group to the scene
     return starGroup;
+}
+
+
+let tiny_star; 
+let medium_star;
+let big_star;
+
+// Attach the slider's event listener
+starSlider.addEventListener('input', update_stars);
+
+// updates stars based on the slider
+export function update_stars() {
+    const starAmount = parseInt(starSlider.value); // Get the slider value
+    starCountDisplay.textContent = starAmount; // Update display with the current count
+
+    // Remove the old group of stars, if any
+    if (tiny_star || medium_star || big_star) {
+        scene.remove(tiny_star);
+        scene.remove(medium_star);
+        scene.remove(big_star);
+    }
+
+    // Create a new group of stars
+    tiny_star = star_creator(0.2, Colors.Stars, starAmount, 250); // Adjust size, color, and range as needed
+    medium_star = star_creator (0.3, Colors.Stars, starAmount, 250);
+    big_star = star_creator (0.4, Colors.Stars, starAmount, 250);
 }

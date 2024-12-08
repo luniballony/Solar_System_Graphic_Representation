@@ -5,11 +5,11 @@
     // imports file with constants defined
     import {Sizes, Colors, Distances, DistancesScale} from './constants.js';
     import {default_distance, distance_between, r_smoothness, ring_angle, saturn_ring_angle, r_thickness, realistic_distance, SpeedScale} from './constants.js';
-    import {image_setup, planet_creator, ring_creator, distance_calculater, star_creator} from './functions.js';
+    import {image_setup, planet_creator, ring_creator, distance_calculater, update_stars} from './functions.js';
 
     import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
-
+    // SCENE + CONTROLS
     export const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(115, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 50; // positions the camera (how far/close it is to the objects)
@@ -27,7 +27,7 @@
     controls.zoomSpeed = 1.2;   // Adjust zoom speed (default is 1)
 
     // Optional: Add limits to zoom
-    controls.minDistance = 5;  // Minimum zoom distance
+    controls.minDistance = 2;  // Minimum zoom distance
     controls.maxDistance = 150; // Maximum zoom distance
 
     // Get slider and display elements
@@ -37,31 +37,6 @@
    
 
     // STARS
-    // Reference to the current group of stars
-    let tiny_star; 
-    let medium_star;
-    let big_star;
-    
-
-    function update_stars() {
-        const starAmount = parseInt(starSlider.value); // Get the slider value
-        starCountDisplay.textContent = starAmount; // Update display with the current count
-    
-        // Remove the old group of stars, if any
-        if (tiny_star || medium_star || big_star) {
-            scene.remove(tiny_star);
-            scene.remove(medium_star);
-            scene.remove(big_star);
-        }
-    
-        // Create a new group of stars
-        tiny_star = star_creator(0.2, Colors.Stars, starAmount, 250); // Adjust size, color, and range as needed
-        medium_star = star_creator (0.3, Colors.Stars, starAmount, 250);
-        big_star = star_creator (0.4, Colors.Stars, starAmount, 250);
-    }
-    
-    // Attach the slider's event listener
-    starSlider.addEventListener('input', update_stars);
     // Create initial stars when the scene loads
     update_stars();
     
