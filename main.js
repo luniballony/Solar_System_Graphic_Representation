@@ -5,7 +5,7 @@
     // imports file with constants defined
     import {Sizes, Colors, Distances, DistancesScale} from './constants.js';
     import {default_distance, distance_between, r_smoothness, ring_angle, saturn_ring_angle, r_thickness, realistic_distance, SpeedScale} from './constants.js';
-    import {image_setup, planet_creator, ring_creator, distance_calculater, update_stars} from './functions.js';
+    import {image_setup, planet_creator, ring_creator, distance_calculater, update_stars, updateRings, removeRings} from './functions.js';
 
     import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
@@ -131,7 +131,7 @@
     // RINGS
     // Rings Creation
     // Only uses DefaultDistance because in realistic mode is set to off
-    let ringsOn = true;
+    export let ringsOn = true;
 
     // Get checkboxes
     const toggleNoRingsCheckbox = document.getElementById('NoRings');
@@ -141,10 +141,10 @@
     });
     
     // Store references to the rings
-    let rings = [];
+    export let rings = [];
     
     // Function to create all rings
-    function createRings() {
+    export function createRings() {
         rings.push(ring_creator('MercuryRing', MercuryDefaultDistance, r_thickness, RingImage, ring_angle, scene));
         rings.push(ring_creator('VenusRing', VenusDefaultDistance, r_thickness, RingImage, ring_angle, scene));
         rings.push(ring_creator('EarthRing', EarthDefaultDistance, r_thickness, RingImage, ring_angle, scene));
@@ -155,29 +155,12 @@
         rings.push(ring_creator('NeptuneRing', NeptuneDefaultDistance, r_thickness, RingImage, ring_angle, scene));
         rings.push(ring_creator('MoonRing', DistancesScale.Moon, 0.009, RingImage, ring_angle, Earth));
         rings.push(ring_creator('SaturnOuterRing', Sizes.Saturn + 0.02, 0.8, SaturnRingImage, saturn_ring_angle, Saturn));
-    }
-    
-    // Function to remove all rings
-    function removeRings() {
-        rings.forEach((ring) => {
-            scene.remove(ring); // Remove ring from scene
-        });
-        rings = []; // Clear the array
-    }
-    
-    // Function to update rings based on `ringsOn`
-    function updateRings() {
-        if (ringsOn) {
-            createRings(); // Add rings
-        } else {
-            removeRings(); // Remove rings
-        }
-    }
+    };
     
     // Initialize rings
     if (ringsOn) {
         createRings();
-    }
+    };
     
 
 

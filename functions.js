@@ -3,7 +3,7 @@
 import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
 import {Sizes, Colors, Distances} from './constants.js';
 import {default_distance, distance_between, r_smoothness, Shine} from './constants.js';
-import {scene} from './main.js';
+import {scene, ringsOn, rings, createRings} from './main.js';
 
 import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
@@ -38,6 +38,7 @@ export function planet_creator (p_name, p_size, image_name, position, parent) {
 }
 
 
+// RINGS
 // Function for ring creation
 export function ring_creator (r_name, r_distance, r_thickness, r_image, r_angle, r_parent) {
     const RingOuterRadius = r_distance;  
@@ -59,6 +60,26 @@ export function ring_creator (r_name, r_distance, r_thickness, r_image, r_angle,
 
     return ring_mesh;
 }
+
+// Rings update based on button: 
+// Function to remove all rings
+export function removeRings() {
+    rings.forEach((ring) => {
+        scene.remove(ring); // Remove ring from scene
+    });
+    rings.length = 0; // Clear the array
+}
+
+// Function to update rings based on 'ringsOn'
+export function updateRings() {
+    if (ringsOn) {
+        createRings(); // Add rings
+    } else {
+        removeRings(); // Remove rings
+    }
+}
+
+
 
 
 // format: Previous_dist + previous_plan_radius + current_plan_radius + distance_between_plan
@@ -117,4 +138,7 @@ export function update_stars() {
     tiny_star = star_creator(0.2, Colors.Stars, starAmount, 250); // Adjust size, color, and range as needed
     medium_star = star_creator (0.3, Colors.Stars, starAmount, 250);
     big_star = star_creator (0.4, Colors.Stars, starAmount, 250);
-}
+};
+
+
+
