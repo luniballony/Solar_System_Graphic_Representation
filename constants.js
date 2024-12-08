@@ -11,6 +11,7 @@
 // Sizes 
 export let Sizes = {
     Sun : 16,
+    Realistic_Sun : 35,
     Mercury: 0.004,
     Venus: 0.01,
     Earth: 0.01,
@@ -19,26 +20,10 @@ export let Sizes = {
     Saturn: 0.09,
     Uranus: 0.04,
     Neptune: 0.04,
-    Stars: 4,
+    Stars: 1,       // must be a low value to avoid lag and crash
     Moon: 0.002,
 };
 
-
-
-// Distances - the distances shall be calculated as distance * specific_planet so that the slider is easier to code
-export const Distances = {
-    Mercury : 2,
-    Venus : 2,
-    Earth : 2,
-    Mars : 2,
-    Jupiter : 2,
-    Saturn : 2,
-    Uranus : 2,
-    Neptune : 2,
-    Moon: 3,
-    SaturnOuterRing: 3,
-};
- 
 
 
 // Scale for distances
@@ -69,36 +54,25 @@ export let SpeedScale = {
 };
 
 
-
 // Colors  
 export const Colors = {
-    Sun : 0xf5c64f,
-    Mercury : 0xCC0000,
-    Venus : 0x0f0f0f,
-    Earth : 0x4FB06D,
-    Mars : 0xEDE8D0,
-    Jupiter : 0xEDE8D0,
-    Saturn : 0xEDE8D0,
-    Uranus : 0xADD8E6,
-    Neptune : 0xADD8E6, 
     Stars : 0xffffff,
-    Moon: 0xffffff,
     Rings: 0xffffff,
-    SaturnOuterRing: 0xADD8E6,
 };
 
 
 // Distances
-export let default_distance = Sizes.Sun + 50; //sets distance between planets in case we want it to be the same between all
+export let default_distance = Sizes.Sun + 20; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 15; // sets distance between planets in Default Mode
-export let realistic_distance = 75; // if sun ray = 10 with Sun-Mercury = 20
-export let ring_angle = Math.PI / 2; // ring angle for planets + moon
-export let saturn_ring_angle = Math.PI / 2 - 0.8; // ring angle for saturn's ring
+export let realistic_distance = Sizes.Realistic_Sun * 8; // if sun radius = 10 with Sun-Mercury = 20
 
 
 // others
+export let ring_angle = Math.PI / 2; // ring angle for planets + moon
+export let saturn_ring_angle = Math.PI / 2 - 0.8; // ring angle for saturn's ring
 export let r_smoothness = 80; // ring smoothness. the higher the more smooth the ring will be
-export let r_thickness = 0.005 * Sizes.Sun; // ring tickness
+export let r_thickness = 0.03 * Sizes.Sun; // ring tickness
+export let star_range = 450; 
 
 export const Shine = 18;
 

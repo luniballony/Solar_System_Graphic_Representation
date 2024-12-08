@@ -9,13 +9,14 @@ November 2024
 // functions.js 
 // imports file with constants defined
 import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
-import {Sizes, Colors, Distances} from './constants.js';
-import {default_distance, distance_between, r_smoothness, Shine} from './constants.js';
+import {Sizes, Colors} from './constants.js';
+import {default_distance, distance_between, r_smoothness, Shine, star_range} from './constants.js';
 import {scene, ringsOn, rings, createRings} from './main.js';
 
 import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
  
+// IMAGES
 // Function to set up images for objects
 export function image_setup (image_path) {
     const image = new THREE.TextureLoader().load(image_path);
@@ -28,6 +29,7 @@ export function image_setup (image_path) {
 }
 
 
+// PLANETS
 // Function for planet creation
 export function planet_creator (p_name, p_size, image_name, position, parent) {
     const planet_geometry = new THREE.SphereGeometry(p_size, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
@@ -89,7 +91,7 @@ export function updateRings() {
 
 
 
-
+// DISTANCES
 // format: Previous_dist + previous_plan_radius + current_plan_radius + distance_between_plan
 // allows for modifications done to variables like distance_between and therefore to have an effect
 export function distance_calculater (Previous_dist, previous_plan_radius, current_plan_radius, distance_between_plan) {
@@ -98,34 +100,49 @@ export function distance_calculater (Previous_dist, previous_plan_radius, curren
 }; 
 
 
+// STARS
 // star creation
-export function star_creator(s_size, s_color, s_amount, range) {
+export function star_creator(s_size, s_color, s_amount, max_radius, inner_radius) {
     const starGroup = new THREE.Group(); // Create a group to manage all stars
+
     for (let i = 0; i < s_amount; i++) {
-        const s_geometry = new THREE.SphereGeometry(s_size, 1, 1); // Smooth stars - must be a low value to avoid lag and crash
+        const s_geometry = new THREE.SphereGeometry(s_size, 1, 1); // Smooth stars - low value for performance
         const s_material = new THREE.MeshPhongMaterial({
             color: s_color,
             shininess: 50, // Small shine for a glowing effect
         });
         const s_mesh = new THREE.Mesh(s_geometry, s_material);
 
-        // Randomize position within a cube-like range
-        s_mesh.position.set(
-            (Math.random() - 0.5) * range, // Randomize X
-            (Math.random() - 0.5) * range, // Randomize Y
-            (Math.random() - 0.5) * range  // Randomize Z
-        );
+        // Randomize position within a spherical shell
+        let x, y, z, distanceFromCenter;
+        do {
+            const theta = Math.random() * 2 * Math.PI; // Random angle for the XY plane
+            const phi = Math.acos(2 * Math.random() - 1); // Random angle for Z axis
+            const radius = Math.random() * (max_radius - inner_radius) + inner_radius;
 
+            // Convert spherical coordinates to Cartesian coordinates
+            x = radius * Math.sin(phi) * Math.cos(theta);
+            y = radius * Math.sin(phi) * Math.sin(theta);
+            z = radius * Math.cos(phi);
+
+            distanceFromCenter = Math.sqrt(x * x + y * y + z * z); // Calculate distance from center
+        } while (distanceFromCenter < inner_radius || distanceFromCenter > max_radius); // Ensure within spherical bounds
+
+        s_mesh.position.set(x, y, z); // Set position for the star
         starGroup.add(s_mesh); // Add each star to the group
     }
+
     scene.add(starGroup); // Add the group to the scene
     return starGroup;
 }
 
 
+
+
 let tiny_star; 
 let medium_star;
 let big_star;
+let another_star;
 
 // Attach the slider's event listener
 starSlider.addEventListener('input', update_stars);
@@ -140,12 +157,14 @@ export function update_stars() {
         scene.remove(tiny_star);
         scene.remove(medium_star);
         scene.remove(big_star);
+        scene.remove(another_star);
     }
 
     // Create a new group of stars
-    tiny_star = star_creator(0.2, Colors.Stars, starAmount, 250); // Adjust size, color, and range as needed
-    medium_star = star_creator (0.3, Colors.Stars, starAmount, 250);
-    big_star = star_creator (0.4, Colors.Stars, starAmount, 250);
+    tiny_star = star_creator(0.6, Colors.Stars, starAmount, star_range, star_range - 200); // Adjust size, color, range and safe_zone as needed
+    medium_star = star_creator (0.8, Colors.Stars, starAmount, star_range, star_range - 200);
+    big_star = star_creator (0.9, Colors.Stars, starAmount, star_range, star_range - 200);
+    another_star = star_creator (0.8, Colors.Stars, starAmount, star_range, star_range - 200);
 };
 
 
