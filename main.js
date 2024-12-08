@@ -204,7 +204,7 @@
 
 
     // LIGHT
-    const SunLight = new THREE.PointLight (Colors.Sun, 1, 3000);
+    const SunLight = new THREE.PointLight (0x404040, 2, 3000); // intensity and range
     SunLight.position.set(0, 0, 0);
     scene.add (SunLight);
     const ambientlight = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
@@ -219,6 +219,8 @@
     toggleMovementCheckbox.addEventListener('change', (event) => {
         planetsMove = !event.target.checked; // Planets move when unchecked
     });
+    
+
 
     // Button to stop rotations
     let planetsRotate = true;
@@ -230,7 +232,7 @@
 
 
     // Realistic Mode
-    let RealisticMode = false; 
+    export let RealisticMode = false; 
     const toggleRealisticMode = document.getElementById('RealisticMode');
 
     // Planets array for easy access. Allows for easy modification upon Realistic Mode

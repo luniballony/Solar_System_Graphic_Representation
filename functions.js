@@ -11,7 +11,7 @@ November 2024
 import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
 import {Sizes, Colors} from './constants.js';
 import {default_distance, distance_between, r_smoothness, Shine, star_range} from './constants.js';
-import {scene, ringsOn, rings, createRings} from './main.js';
+import {scene, ringsOn, rings, createRings, RealisticMode} from './main.js';
 
 import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
@@ -82,7 +82,7 @@ export function removeRings() {
 
 // Function to update rings based on 'ringsOn'
 export function updateRings() {
-    if (ringsOn) {
+    if (ringsOn & !RealisticMode) {  // Prevents Rings to be created while on Realistic Mode
         createRings(); // Add rings
     } else {
         removeRings(); // Remove rings
