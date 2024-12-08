@@ -1,5 +1,12 @@
+    /* 
+    Solar System - Graphic Representation
+    CG - efolio b 
+    Matilde Carmo 2201036
+    November 2024
+    */
+
+
 // constants.js
-// dont forget to add the list name to the index.html file
 
 // Sizes 
 export let Sizes = {

@@ -1,35 +1,15 @@
 # Solar_System_Graphic_Representation
  html page that represents the Solar System. 
 
- This program includes multiple interactions: 
- - Slider to control amount of stars
- - Slider to control planets movement speed
- - Button to switch between Daytime/Nighttime on planet Earth
- - Button for realistic mode:
-    - Planets get a realistic size ?
-    - Planets get a closer to realistic speed
-    - No rings
-    - Planets get a realistic distance between each other
-
 
 
 Features to add: 
-- option for realistic version
-    - botton to remove rings
-    - realistic movement speed
-    - realistic distances (in progress)
-
-
-
 Optimizations: 
 - stop rotation of saturn ring
-- add a yearly counter 
-- add a sphere as a background and set it as milky way
-    - add a botton to disable it
-- in non realistic mode make sun a little smaller so it everything fits a lil better
+- make stars background only
+- make planets bigger for Default Mode
 
 Fixes: 
-- fix "NoRings" botton
 - fix uranus imagine (replace it)
 - fix moon rotation (has to be oppisite direction)
 - create slider to control number of stars (optional) (in progress) <-- needs to be refined
@@ -51,10 +31,14 @@ Done:
 - add texture + imagine for each planet and sun (DONE)
 - create moon (DONE)
 - add scroll wheel control (DONE)
+- fix "NoRings" botton (DONE)
 - add option for daytime and nightitme in planet earth (DONE)
-- realistic size (DONE)
-- create slider to control speed (DONE)
-
+- option for realistic version (DONE)
+    - realistic movement speed (DONE)
+    - realistic size (DONE)
+    - realistic distances (DONE)
+    - create slider to control speed (DONE)
+    - botton to remove rings (DONE)
 
 
 Project started on november 28 of 2024

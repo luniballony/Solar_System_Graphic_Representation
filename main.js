@@ -1,5 +1,11 @@
-    // efolio b - matilde carmo 2201036 v1
-    // v1 : Sizes and Colors set
+    /* 
+    Solar System - Graphic Representation
+    CG - efolio b 
+    Matilde Carmo 2201036
+    November 2024
+    */
+   
+    
     import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
 
     // imports file with constants defined
@@ -26,7 +32,7 @@
     controls.enableZoom = true; // This allows zooming
     controls.zoomSpeed = 1.2;   // Adjust zoom speed (default is 1)
 
-    // Optional: Add limits to zoom
+    // Zoom Limits
     controls.minDistance = 2;  // Minimum zoom distance
     controls.maxDistance = 150; // Maximum zoom distance
 
@@ -40,7 +46,6 @@
     // Create initial stars when the scene loads
     update_stars();
     
-
 
     // PLANETS + SUN + MOON
     // Sun + Planets + Moon image set up
@@ -59,7 +64,6 @@
     let RingImage = image_setup ("/ring.png");
 
 
-
     // Planet + Sun + Moon Creation
     let Sun = planet_creator ('Sun', Sizes.Sun, SunImage, 0, scene); 
     let Mercury = planet_creator ('Mercury', Sizes.Sun * Sizes.Mercury , MercuryImage, 0, scene);
@@ -71,6 +75,7 @@
     let Uranus = planet_creator ('Uranus', Sizes.Sun * Sizes.Uranus, UranusImage, 0, scene);
     let Neptune = planet_creator ('Neptune', Sizes.Sun * Sizes.Neptune, NeptuneImage, 0, scene);
     let Moon = planet_creator ('Moon', Sizes.Sun * Sizes.Moon, MoonImage, DistancesScale.Moon, Earth);
+
 
     // Set earth to day time 
     let earthNightTime = true;
@@ -99,13 +104,10 @@
     let RealisticUranusDistance = DistancesScale.Uranus * realistic_distance;
     let RealisticNeptuneDistance = DistancesScale.Neptune * realistic_distance;
     
-
-
  
-    // currently they all have same distance between each other
-    // to change that, replace distance_between for new variable with new value
-    // distances through functions
-    // dsitancias para modo não realista
+    // Distances for Default Mode
+    // All planets have same distance between each other
+    // To change distance modify "distance_between" in constants.js
     let MercuryDefaultDistance = default_distance + Sizes.Mercury; // must be called like this as its the first planet
     let VenusDefaultDistance = distance_calculater (MercuryDefaultDistance, Sizes.Mercury, Sizes.Venus, distance_between);
     let EarthDefaultDistance = distance_calculater (VenusDefaultDistance, Sizes.Venus, Sizes.Earth, distance_between);
@@ -116,8 +118,8 @@
     let NeptuneDefaultDistance = distance_calculater (UranusDefaultDistance, Sizes.Uranus, Sizes.Neptune, distance_between);
    
 
-    // initialization of variables
-    // allows switch between Default and Realistic Values
+    // Initialization of variables
+    // Allows switch between Default and Realistic Values
     let MercuryDistance = MercuryDefaultDistance;
     let VenusDistance = VenusDefaultDistance;
     let EarthDistance = EarthDefaultDistance;
@@ -164,9 +166,6 @@
     
 
 
-
-
-
     // SPEEDS
     // Set speeds as 0
     // must be set in this file due to later modifications to variables
@@ -181,6 +180,8 @@
 
     let planet_speed = parseFloat (speedSlider.value);
 
+    // cannot export to functions.js because it wouldnt modify the variables as they have been 
+    // defined in this document
     function control_planet_speed () {
         planet_speed = parseFloat(speedSlider.value); // Update the global speed
         speedDisplay.textContent = planet_speed.toFixed(5); // Display with 2 decimal places
@@ -230,10 +231,6 @@
 
   // Realistic Mode
   let RealisticMode = false; 
-
-
-
-
   const toggleRealisticMode = document.getElementById('RealisticMode');
 
 
@@ -258,6 +255,7 @@
         SaturnDistance = RealisticSaturnDistance;
         UranusDistance = RealisticUranusDistance;
         NeptuneDistance = RealisticNeptuneDistance; 
+
       }
       else {    // On Default Mode
         const RealisticSunGeometry = new THREE.SphereGeometry(Sizes.Sun, 60, 60);
@@ -275,23 +273,6 @@
         UranusDistance = UranusDefaultDistance; 
         NeptuneDistance = NeptuneDefaultDistance;
     }
-
-
-    
-
-      /*
-
-      MercuryDistance = RealisticDistance.Mercury ;
-      VenusDistance = RealisticDistance.Venus ;
-      EarthDistance = RealisticDistance.Earth;
-      MarsDistance = RealisticDistance.Mars ;
-      JupiterDistance = RealisticDistance.Jupiter;
-      SaturnDistance = RealisticDistance.Saturn;
-      UranusDistance = RealisticDistance.Uranus;
-      NeptuneDistance = RealisticDistance.Neptune; */ 
-      // update rings
-      // update speed
-
 
   }); 
 

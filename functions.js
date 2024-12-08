@@ -1,3 +1,11 @@
+/* 
+Solar System - Graphic Representation
+CG - efolio b 
+Matilde Carmo 2201036
+November 2024
+*/
+
+
 // functions.js 
 // imports file with constants defined
 import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
