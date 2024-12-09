@@ -9,11 +9,10 @@ November 2024
 // functions.js 
 // imports file with constants defined
 import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
-import {Sizes, Colors} from './constants.js';
-import {default_distance, distance_between, r_smoothness, Shine, star_range} from './constants.js';
+import {Colors} from './constants.js';
+import {r_smoothness, star_range} from './constants.js';
 import {scene, ringsOn, rings, createRings, RealisticMode} from './main.js';
 
-import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
 
  
 // IMAGES
@@ -136,7 +135,8 @@ export function star_creator(s_size, s_color, s_amount, max_radius, inner_radius
 
 
 
-
+// Initialize stars
+// To spawn less stars delete one of these
 let tiny_star; 
 let medium_star;
 let big_star;

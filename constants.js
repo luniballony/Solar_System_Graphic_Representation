@@ -7,6 +7,7 @@
 
 
 // constants.js
+// file with constants for easier management
 
 // Sizes 
 export let Sizes = {
@@ -70,8 +71,8 @@ export let realistic_distance = Sizes.Realistic_Sun * 3; // if sun radius = 10 w
 // others
 export let ring_angle = Math.PI / 2; // ring angle for planets + moon
 export let saturn_ring_angle = Math.PI / 2 - 0.8; // ring angle for saturn's ring
-export let r_smoothness = 80; // ring smoothness. the higher the more smooth the ring will be
-export let r_thickness = 0.03 * Sizes.Sun; // ring tickness
+export let r_smoothness = 200; // ring smoothness. the higher the more smooth the ring will be
+export let r_thickness = 0.02 * Sizes.Sun; // ring tickness
 export let star_range = 800; 
 
 export const Shine = 18;

@@ -9,8 +9,8 @@
     import * as THREE from 'https://unpkg.com/three@0.124.0/build/three.module.js'; 
 
     // imports file with constants defined
-    import {Sizes, Colors, DistancesScale} from './constants.js';
-    import {default_distance, distance_between, r_smoothness, ring_angle, saturn_ring_angle, r_thickness, realistic_distance, SpeedScale} from './constants.js';
+    import {Sizes, DistancesScale} from './constants.js';
+    import {default_distance, distance_between, ring_angle, saturn_ring_angle, r_thickness, realistic_distance, SpeedScale} from './constants.js';
     import {image_setup, planet_creator, ring_creator, distance_calculater, update_stars, updateRings, removeRings} from './functions.js';
 
     import { OrbitControls } from 'https://unpkg.com/three@0.124.0/examples/jsm/controls/OrbitControls.js';
@@ -66,15 +66,15 @@
 
     // Planet + Sun + Moon Creation
     let Sun = planet_creator ('Sun', Sizes.Sun, SunImage, 0, scene); 
-    let Mercury = planet_creator ('Mercury', Sizes.Sun * Sizes.Mercury, MercuryImage, 0, scene);
-    let Venus = planet_creator ('Venus', Sizes.Sun * Sizes.Venus, VenusImage, 0, scene);
-    let Earth = planet_creator ('Earth', Sizes.Sun * Sizes.Earth, EarthImageNight, 0, scene);
-    let Mars = planet_creator ('Mars', Sizes.Sun *  Sizes.Mars, MarsImage, 0, scene);
-    let Jupiter = planet_creator ('Jupiter', Sizes.Sun * Sizes.Jupiter, JupiterImage, 0, scene);
-    let Saturn = planet_creator ('Saturn', Sizes.Sun * Sizes.Saturn, SaturnImage, 0, scene);
-    let Uranus = planet_creator ('Uranus', Sizes.Sun * Sizes.Uranus, UranusImage, 0, scene);
-    let Neptune = planet_creator ('Neptune', Sizes.Sun * Sizes.Neptune, NeptuneImage, 0, scene);
-    let Moon = planet_creator ('Moon', Sizes.Sun * Sizes.Moon, MoonImage, DistancesScale.Moon, Earth);
+    let Mercury = planet_creator ('Mercury', Sizes.Sun * 20 * Sizes.Mercury, MercuryImage, 0, scene);
+    let Venus = planet_creator ('Venus', Sizes.Sun * 15 * Sizes.Venus, VenusImage, 0, scene);
+    export let Earth = planet_creator ('Earth', Sizes.Sun * 15 * Sizes.Earth, EarthImageNight, 0, scene);
+    let Mars = planet_creator ('Mars', Sizes.Sun * 15 *  Sizes.Mars, MarsImage, 0, scene);
+    let Jupiter = planet_creator ('Jupiter', Sizes.Sun * 3 * Sizes.Jupiter, JupiterImage, 0, scene);
+    let Saturn = planet_creator ('Saturn', Sizes.Sun * 3 * Sizes.Saturn, SaturnImage, 0, scene);
+    let Uranus = planet_creator ('Uranus', Sizes.Sun * 3 * Sizes.Uranus, UranusImage, 0, scene);
+    let Neptune = planet_creator ('Neptune', Sizes.Sun * 3 * Sizes.Neptune, NeptuneImage, 0, scene);
+    let Moon = planet_creator ('Moon', Sizes.Sun * 5 * Sizes.Moon, MoonImage, DistancesScale.Moon * 8, Earth);
 
 
     // Set earth to day time 
@@ -103,6 +103,7 @@
     let RealisticSaturnDistance = default_distance + DistancesScale.Saturn * realistic_distance;
     let RealisticUranusDistance = default_distance + DistancesScale.Uranus * realistic_distance;
     let RealisticNeptuneDistance = default_distance + DistancesScale.Neptune * realistic_distance;
+    let RealisticNeptuneOuterRingDistance = RealisticSaturnDistance + 3;
 
 
     // Distances for Default Mode
@@ -116,6 +117,7 @@
     let SaturnDefaultDistance = distance_calculater (JupiterDefaultDistance, Sizes.Jupiter, Sizes.Saturn, distance_between); 
     let UranusDefaultDistance = distance_calculater (SaturnDefaultDistance, Sizes.Saturn, Sizes.Uranus, distance_between);
     let NeptuneDefaultDistance = distance_calculater (UranusDefaultDistance, Sizes.Uranus, Sizes.Neptune, distance_between);
+    let NeptuneOuterRingDefaultDistance = DistancesScale.Saturn + 0.02;
 
 
     // Initialization of variables
@@ -128,7 +130,7 @@
     let SaturnDistance = SaturnDefaultDistance;
     let UranusDistance = UranusDefaultDistance; 
     let NeptuneDistance = NeptuneDefaultDistance;
-
+    let NeptuneOuterRingDistance = NeptuneOuterRingDefaultDistance;
 
     // RINGS
     // Rings Creation
@@ -155,8 +157,8 @@
         rings.push(ring_creator('SaturnRing', SaturnDefaultDistance, r_thickness, RingImage, ring_angle, scene));
         rings.push(ring_creator('UranusRing', UranusDefaultDistance, r_thickness, RingImage, ring_angle, scene));
         rings.push(ring_creator('NeptuneRing', NeptuneDefaultDistance, r_thickness, RingImage, ring_angle, scene));
-        rings.push(ring_creator('MoonRing', DistancesScale.Moon, 0.009, RingImage, ring_angle, Earth));
-        rings.push(ring_creator('SaturnOuterRing', Sizes.Saturn + 0.02, 0.8, SaturnRingImage, saturn_ring_angle, Saturn));
+        rings.push(ring_creator('MoonRing', DistancesScale.Moon * 8, 0.009, RingImage, ring_angle, Earth));
+        rings.push(ring_creator('SaturnOuterRing', NeptuneOuterRingDistance, 0.8, SaturnRingImage, saturn_ring_angle, Saturn));
     };
 
     // Initialize rings
@@ -202,12 +204,11 @@
 
 
 
-
     // LIGHT
     const SunLight = new THREE.PointLight (0x404040, 2, 3000); // intensity and range
     SunLight.position.set(0, 0, 0);
     scene.add (SunLight);
-    const ambientlight = new THREE.AmbientLight( 0x404040, 2 ); // soft white light
+    const ambientlight = new THREE.AmbientLight( 0x404040, 2); // soft white light
     scene.add( ambientlight );
 
 
@@ -237,14 +238,15 @@
 
     // Planets array for easy access. Allows for easy modification upon Realistic Mode
     const planets = [
-    { planet: Mercury, defaultSize: Sizes.Mercury * 3 * Sizes.Sun, realisticSize: Sizes.Mercury * Sizes.Sun},
-    { planet: Venus, defaultSize: Sizes.Venus * 3 * Sizes.Sun, realisticSize: Sizes.Venus * Sizes.Sun},
-    { planet: Earth, defaultSize: Sizes.Earth * 3 * Sizes.Sun, realisticSize: Sizes.Earth * Sizes.Sun},
-    { planet: Mars, defaultSize: Sizes.Mars * 3 * Sizes.Sun, realisticSize: Sizes.Mars * Sizes.Sun },
-    { planet: Jupiter, defaultSize: Sizes.Jupiter * 3 * Sizes.Sun, realisticSize: Sizes.Jupiter * Sizes.Sun},
-    { planet: Saturn, defaultSize: Sizes.Saturn * 3 * Sizes.Sun, realisticSize: Sizes.Saturn * Sizes.Sun},
+    { planet: Mercury, defaultSize: Sizes.Mercury * 20 * Sizes.Sun, realisticSize: Sizes.Mercury * Sizes.Sun},
+    { planet: Venus, defaultSize: Sizes.Venus * 15 * Sizes.Sun, realisticSize: Sizes.Venus * Sizes.Sun},
+    { planet: Earth, defaultSize: Sizes.Earth * 15 * Sizes.Sun, realisticSize: Sizes.Earth * Sizes.Sun},
+    { planet: Mars, defaultSize: Sizes.Mars  * 15 * Sizes.Sun, realisticSize: Sizes.Mars * Sizes.Sun },
+    { planet: Jupiter, defaultSize: Sizes.Jupiter  * 3 * Sizes.Sun, realisticSize: Sizes.Jupiter * Sizes.Sun},
+    { planet: Saturn, defaultSize: Sizes.Saturn  * 3 * Sizes.Sun, realisticSize: Sizes.Saturn * Sizes.Sun},
     { planet: Uranus, defaultSize: Sizes.Uranus * 3 * Sizes.Sun, realisticSize: Sizes.Uranus * Sizes.Sun},
-    { planet: Neptune, defaultSize: Sizes.Neptune * 3 * Sizes.Sun, realisticSize: Sizes.Neptune * Sizes.Sun}
+    { planet: Neptune, defaultSize: Sizes.Neptune * 3 * Sizes.Sun, realisticSize: Sizes.Neptune * Sizes.Sun},
+    { planet: Moon, defaultSize: Sizes.Moon * 5 * Sizes.Sun, realisticSize: Sizes.Moon * Sizes.Sun},
     ];
 
 
@@ -252,64 +254,66 @@
         RealisticMode = event.target.checked;
 
         if (RealisticMode) {
-        // Update planets to realistic sizes
-        planets.forEach(({ planet, realisticSize }) => {
-            const geometry = new THREE.SphereGeometry(realisticSize, 30, 30);
-            planet.geometry = geometry;
-            planet.geometry.needsUpdate = true;
-        });
+            // Update planets to realistic sizes
+            planets.forEach(({ planet, realisticSize }) => {
+                const geometry = new THREE.SphereGeometry(realisticSize, 30, 30);
+                planet.geometry = geometry;
+                planet.geometry.needsUpdate = true;
+            });
 
-        // update sun size
-        const RealisticSunGeometry = new THREE.SphereGeometry(Sizes.Realistic_Sun, 30, 30);
-        Sun.geometry = RealisticSunGeometry;
-        Sun.geometry.needsUpdate = true;      
-        
-        removeRings ();
-        
-        // update distance
-        MercuryDistance = RealisticMercuryDistance;
-        VenusDistance = RealisticVenusDistance;
-        EarthDistance = RealisticEarthDistance;
-        MarsDistance = RealisticMarsDistance;
-        JupiterDistance = RealisticJupiterDistance;
-        SaturnDistance = RealisticSaturnDistance;
-        UranusDistance = RealisticUranusDistance;
-        NeptuneDistance = RealisticNeptuneDistance; 
+            // update sun size
+            const RealisticSunGeometry = new THREE.SphereGeometry(Sizes.Realistic_Sun, 30, 30);
+            Sun.geometry = RealisticSunGeometry;
+            Sun.geometry.needsUpdate = true;      
+            
+            removeRings ();
+            
+            // update distance
+            MercuryDistance = RealisticMercuryDistance;
+            VenusDistance = RealisticVenusDistance;
+            EarthDistance = RealisticEarthDistance;
+            MarsDistance = RealisticMarsDistance;
+            JupiterDistance = RealisticJupiterDistance;
+            SaturnDistance = RealisticSaturnDistance;
+            UranusDistance = RealisticUranusDistance;
+            NeptuneDistance = RealisticNeptuneDistance; 
 
         }
-        else {    // On Default Mode
-        const RealisticSunGeometry = new THREE.SphereGeometry(Sizes.Sun, 60, 60);
-        Sun.geometry = RealisticSunGeometry;
-        Sun.geometry.needsUpdate = true;   
-        toggleNoRingsCheckbox.checked = true;
+        else {    
+        
+            // On Default Mode
+            // Update sun size
+            const RealisticSunGeometry = new THREE.SphereGeometry(Sizes.Sun, 60, 60);
+            Sun.geometry = RealisticSunGeometry;
+            Sun.geometry.needsUpdate = true;   
+            toggleNoRingsCheckbox.checked = true;
 
-        createRings ();
+            createRings ();
 
-        // Update planets to default sizes
-        planets.forEach(({ planet, defaultSize }) => {
-            const geometry = new THREE.SphereGeometry(defaultSize, 60, 60);
-            planet.geometry = geometry;
-            planet.geometry.needsUpdate = true;
-        });
+            // Update planets to default sizes
+            planets.forEach(({ planet, defaultSize }) => {
+                const geometry = new THREE.SphereGeometry(defaultSize, 60, 60);
+                planet.geometry = geometry;
+                planet.geometry.needsUpdate = true;
+            });
 
-        MercuryDistance = MercuryDefaultDistance;
-        VenusDistance = VenusDefaultDistance;
-        EarthDistance = EarthDefaultDistance;
-        MarsDistance = MarsDefaultDistance;
-        JupiterDistance = JupiterDefaultDistance;
-        SaturnDistance = SaturnDefaultDistance;
-        UranusDistance = UranusDefaultDistance; 
-        NeptuneDistance = NeptuneDefaultDistance;
-    }
-
+            // update distances to default
+            MercuryDistance = MercuryDefaultDistance;
+            VenusDistance = VenusDefaultDistance;
+            EarthDistance = EarthDefaultDistance;
+            MarsDistance = MarsDefaultDistance;
+            JupiterDistance = JupiterDefaultDistance;
+            SaturnDistance = SaturnDefaultDistance;
+            UranusDistance = UranusDefaultDistance; 
+            NeptuneDistance = NeptuneDefaultDistance;
+        }
     }); 
-
 
 
     function animate() {
         requestAnimationFrame(animate);
 
-            // Update the controls
+        // Update the controls
         controls.update();
 
         // the value determines the speed of rotation on itself
