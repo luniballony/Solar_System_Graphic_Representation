@@ -35,8 +35,6 @@ export function planet_creator (p_name, p_size, image_name, position, parent) {
     const planet_geometry = new THREE.SphereGeometry(p_size, 30, 30); // 1st: radius, 2nd: horizontal smooth appearance, 3rd: vetical smooth appearance
     const planet_material = new THREE.MeshPhongMaterial ({
         map: image_name,
-        specular: 0x33333,   // Specular color, adjust for shininess
-        shininess: Shine     // Higher shininess = smaller, sharper reflections
     });
     const planet_mesh = new THREE.Mesh(planet_geometry, planet_material);
     planet_mesh.name = p_name;
@@ -161,10 +159,10 @@ export function update_stars() {
     }
 
     // Create a new group of stars
-    tiny_star = star_creator(0.6, Colors.Stars, starAmount, star_range, star_range - 200); // Adjust size, color, range and safe_zone as needed
-    medium_star = star_creator (0.8, Colors.Stars, starAmount, star_range, star_range - 200);
-    big_star = star_creator (0.9, Colors.Stars, starAmount, star_range, star_range - 200);
-    another_star = star_creator (0.8, Colors.Stars, starAmount, star_range, star_range - 200);
+    tiny_star = star_creator(0.6, Colors.Stars, starAmount, star_range, star_range - 250); // Adjust size, color, range and safe_zone as needed
+    medium_star = star_creator (0.8, Colors.Stars, starAmount, star_range, star_range - 250);
+    big_star = star_creator (0.9, Colors.Stars, starAmount, star_range, star_range - 250);
+    another_star = star_creator (0.8, Colors.Stars, starAmount, star_range, star_range - 250);
 };
 
 

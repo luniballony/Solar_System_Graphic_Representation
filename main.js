@@ -95,14 +95,14 @@
 
     // DISTANCES
     // Distances for realistic mode
-    let RealisticMercuryDistance = DistancesScale.Mercury * realistic_distance;
-    let RealisticVenusDistance = DistancesScale.Venus * realistic_distance;
-    let RealisticEarthDistance = DistancesScale.Earth * realistic_distance;
-    let RealisticMarsDistance = DistancesScale.Mars * realistic_distance;
-    let RealisticJupiterDistance = DistancesScale.Jupiter * realistic_distance;
-    let RealisticSaturnDistance = DistancesScale.Saturn * realistic_distance;
-    let RealisticUranusDistance = DistancesScale.Uranus * realistic_distance;
-    let RealisticNeptuneDistance = DistancesScale.Neptune * realistic_distance;
+    let RealisticMercuryDistance = default_distance + DistancesScale.Mercury * realistic_distance;
+    let RealisticVenusDistance = default_distance + DistancesScale.Venus * realistic_distance;
+    let RealisticEarthDistance = default_distance + DistancesScale.Earth * realistic_distance;
+    let RealisticMarsDistance = default_distance + DistancesScale.Mars * realistic_distance;
+    let RealisticJupiterDistance = default_distance + DistancesScale.Jupiter * realistic_distance;
+    let RealisticSaturnDistance = default_distance + DistancesScale.Saturn * realistic_distance;
+    let RealisticUranusDistance = default_distance + DistancesScale.Uranus * realistic_distance;
+    let RealisticNeptuneDistance = default_distance + DistancesScale.Neptune * realistic_distance;
 
 
     // Distances for Default Mode

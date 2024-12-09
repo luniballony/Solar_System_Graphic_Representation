@@ -64,7 +64,7 @@ export const Colors = {
 // Distances
 export let default_distance = Sizes.Sun + 20; //sets distance between planets in case we want it to be the same between all
 export let distance_between = 15; // sets distance between planets in Default Mode
-export let realistic_distance = Sizes.Realistic_Sun * 8; // if sun radius = 10 with Sun-Mercury = 20
+export let realistic_distance = Sizes.Realistic_Sun * 3; // if sun radius = 10 with Sun-Mercury = 20
 
 
 // others
@@ -72,7 +72,7 @@ export let ring_angle = Math.PI / 2; // ring angle for planets + moon
 export let saturn_ring_angle = Math.PI / 2 - 0.8; // ring angle for saturn's ring
 export let r_smoothness = 80; // ring smoothness. the higher the more smooth the ring will be
 export let r_thickness = 0.03 * Sizes.Sun; // ring tickness
-export let star_range = 450; 
+export let star_range = 800; 
 
 export const Shine = 18;
 
