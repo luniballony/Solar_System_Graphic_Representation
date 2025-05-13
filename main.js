@@ -49,19 +49,19 @@
 
     // PLANETS + SUN + MOON
     // Sun + Planets + Moon image set up
-    let SunImage = image_setup ("/sun.jpg");
-    let MercuryImage = image_setup ("/mercury.jpg");
-    let VenusImage = image_setup ("/venus.jpg");
-    let EarthImageNight = image_setup ("/earthnight.jpg");
-    let EarthImageDay = image_setup ("/earthday.jpg");
-    let MarsImage = image_setup ("/mars.jpg");
-    let JupiterImage = image_setup ("/jupiter.jpg");
-    let SaturnImage = image_setup ("/saturn.jpg");
-    let UranusImage = image_setup ("/uranus.jpg");
-    let NeptuneImage = image_setup ("/neptune.jpg");
-    let MoonImage = image_setup ("/moon.jpg");
-    let SaturnRingImage = image_setup ("/saturnring.png");
-    let RingImage = image_setup ("/ring.png");
+    let SunImage = image_setup ("./sun.jpg");
+    let MercuryImage = image_setup ("./mercury.jpg");
+    let VenusImage = image_setup ("./venus.jpg");
+    let EarthImageNight = image_setup ("./earthnight.jpg");
+    let EarthImageDay = image_setup ("./earthday.jpg");
+    let MarsImage = image_setup ("./mars.jpg");
+    let JupiterImage = image_setup ("./jupiter.jpg");
+    let SaturnImage = image_setup ("./saturn.jpg");
+    let UranusImage = image_setup ("./uranus.jpg");
+    let NeptuneImage = image_setup ("./neptune.jpg");
+    let MoonImage = image_setup ("./moon.jpg");
+    let SaturnRingImage = image_setup ("./saturnring.png");
+    let RingImage = image_setup ("./ring.png");
 
 
     // Planet + Sun + Moon Creation
@@ -165,8 +165,6 @@
     if (ringsOn) {
         createRings();
     };
-
-
 
     // SPEEDS
     // Set speeds as 0
